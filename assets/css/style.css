@@ -261,3 +261,19 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
   -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, .6) 45%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, .6) 45%, transparent 100%); }
 @media (max-width: 991.98px) { .sr-hero::after { inset: auto 0 0 0; width: 100%; height: 55%;
   -webkit-mask-image: linear-gradient(0deg, #000 0%, transparent 100%); mask-image: linear-gradient(0deg, #000 0%, transparent 100%); } }
+
+/* Bar "Contoh data" ala bar pengumuman Apple: rata tengah, latar krem selebar layar */
+.sr-note { text-align: center; background: var(--sr-accent); box-shadow: 0 0 0 100vmax var(--sr-accent); clip-path: inset(0 -100vmax); }
+
+/* Menu atas: garis bawah meluncur saat disorot; menu aktif tetap bergaris */
+.sr-nav a { position: relative; transition: color var(--sr-dur) ease-out; }
+.sr-nav a:hover { color: var(--sr-primary); }
+.sr-nav a::after { content: ""; position: absolute; left: .25rem; right: .25rem; bottom: .5rem; height: 2px; border-radius: 2px; background: var(--sr-primary);
+  transform: scaleX(0); transition: transform var(--sr-dur) ease-out; }
+.sr-nav a:hover::after, .sr-nav a[aria-current="page"]::after { transform: scaleX(1); }
+
+/* Header berbayang halus begitu halaman di-scroll (Chrome/Edge/Safari baru; browser lain tetap tanpa bayangan) */
+@supports (animation-timeline: scroll()) {
+  .sr-header { animation: sr-header-shadow linear both; animation-timeline: scroll(); animation-range: 0 120px; }
+}
+@keyframes sr-header-shadow { to { box-shadow: 0 6px 24px rgba(92, 61, 46, .12); } }
