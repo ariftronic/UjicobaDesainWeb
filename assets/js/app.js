@@ -24,13 +24,19 @@
     phone: '<path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>',
     x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
     arrow: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
-    landmark: '<path d="M10 18v-7"/><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/>',
     utensils: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
-    cookie: '<path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/>',
-    coffee: '<path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/>',
-    store: '<path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/><path d="M2 7h20l-2-5H4z"/>',
     wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>'
   };
+  /* Ikon merek Simple Icons (CC0), diisi warna, bukan garis */
+  const B = {
+    youtube: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
+    x: 'M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z',
+    tiktok: 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z',
+    instagram: 'M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077',
+    facebook: 'M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z',
+    threads: 'M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z'
+  };
+  const brandIcon = n => `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${B[n]}"/></svg>`;
   const icon = (n, s = 20) => `<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
   const STATUS = { READY: 'READY', HABIS: 'HABIS', BELUM: 'BELUM TERKONFIRMASI' };
   const hhmm = s => s.replace(':', '.');
@@ -53,7 +59,7 @@
           </nav>
           <form class="d-none d-lg-flex" role="search" action="jelajah.html">
             <label class="visually-hidden" for="hdr-q">Cari makanan atau area</label>
-            <input class="form-control" id="hdr-q" name="q" type="search" placeholder="Cari makanan atau area" style="width:240px">
+            <input class="form-control" id="hdr-q" name="q" type="search" placeholder="Cari makanan atau area" style="width:264px">
           </form>
           <a class="btn btn-sr ms-auto ms-md-0" href="jelajah.html#filter">${icon('filter', 18)}<span>Filter</span></a>
         </div>
@@ -65,7 +71,8 @@
           <div class="row g-4">
             <div class="col-md-6">
               <div class="d-flex align-items-center gap-2 mb-2">${logo(true)}<span class="sr-display fs-4 text-white">SoloRasa</span></div>
-              <p class="mb-0">Jelajahi rasa, temukan cerita di setiap sudut Solo.</p>
+              <p class="mb-3">Jelajahi rasa, temukan cerita di setiap sudut Solo.</p>
+              ${D && D.social ? `<ul class="sr-social list-unstyled d-flex flex-wrap gap-2 mb-0" aria-label="Media sosial">${D.social.map(x => `<li><a href="${x.url}" target="_blank" rel="noopener" aria-label="SoloRasa di ${x.name}" title="${x.name}">${brandIcon(x.id)}</a></li>`).join('')}</ul>` : ''}
             </div>
             <nav class="col-6 col-md-3" aria-label="Navigasi footer"><h2 class="h6 text-white">Navigasi</h2>
               <ul class="list-unstyled mb-0"><li><a href="jelajah.html">Jelajah kuliner</a></li><li><a href="peta.html">Peta</a></li><li><a href="jelajah.html#filter">Filter</a></li></ul></nav>
@@ -74,7 +81,7 @@
           </div>
           <hr class="border-light opacity-25">
           <p class="credit mb-1">${esc(D ? D.credits : '')}</p>
-          <p class="credit mb-0">© 2026 SoloRasa · Tugas Desain Web Kelompok 1, PTIK FKIP UNS. Data dicek ${esc(D ? D.checkedAt : '')}.</p>
+          <p class="credit mb-0">Copyright © 2026 SoloRasa · Kelompok 1, Fakultas Keguruan dan Ilmu Pendidikan, Pendidikan Teknik Informatika dan Komputer, Universitas Sebelas Maret.</p>
         </div>
       </footer>
       <nav class="sr-bottom-nav d-flex d-md-none" aria-label="Navigasi bawah">
@@ -106,11 +113,15 @@
 
   /* ---------- halaman ---------- */
   function home(main) {
-    const tiles = [['Legendaris', 'landmark'], ['Makanan Berat', 'utensils'], ['Jajanan', 'cookie'], ['Kopi & Kafe', 'coffee'], ['Street Food', 'store'], ['Murah', 'wallet']]
-      .filter(([t]) => D.places.some(p => SR.matchesCategory(p, t))); // jangan tampilkan kategori yang belum ada datanya (hasil kosong)
+    // foto kategori diambil dari tempat yang cocok, utamakan foto yang belum dipakai; kategori tanpa data tidak ditampilkan
+    const used = new Set();
+    const tiles = ['Legendaris', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Street Food', 'Murah'].map(t => {
+      const ps = D.places.filter(p => SR.matchesCategory(p, t)); if (!ps.length) return null;
+      const p = ps.find(x => !used.has(x.img)) || ps[0]; used.add(p.img); return [t, p.img];
+    }).filter(Boolean);
     main.innerHTML = `
       <section class="sr-hero">
-        <img class="hero-bg" src="assets/img/hero-wedangan.webp" alt="" width="1280" height="1024" fetchpriority="high">
+        <img class="hero-bg" src="assets/img/hero-pasar-gede.webp" alt="" width="1280" height="720" fetchpriority="high">
         <div class="container-xl position-relative py-5"><div class="row"><div class="col-lg-6 py-lg-5">
           <h1>Jelajahi Kuliner Solo Tanpa Ribet</h1>
           <p class="fs-5 text-muted-sr">Cari makanan, harga, porsi, stok, dan informasi penting dalam satu tempat.</p>
@@ -123,16 +134,31 @@
         </div>
         </div></div></div></section>
       <section class="container-xl py-5" aria-labelledby="h-kat"><h2 id="h-kat" class="mb-3">Mau makan apa?</h2>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-6 g-3">${tiles.map(([t, ic]) => `<div class="col"><a class="tile" href="jelajah.html?kategori=${encodeURIComponent(t)}">${icon(ic, 22)}<span>${t}</span></a></div>`).join('')}</div></section>
+        <div class="sr-scroll"><div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">${tiles.map(([t, img]) => `<div class="col"><a class="tile" href="jelajah.html?kategori=${encodeURIComponent(t)}"><span>${t}</span><img src="${img}" alt="" loading="lazy" width="640" height="480"></a></div>`).join('')}</div></div></section>
       <section class="py-5" style="background:var(--sr-accent)" aria-labelledby="h-pil"><div class="container-xl">
         <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
           <div><h2 id="h-pil" class="mb-1">Pilihan Kuliner Solo</h2><p class="text-muted-sr mb-0">Legendaris, murah, dan favorit wisatawan.</p></div>
-          <a class="btn btn-sr-outline" href="jelajah.html">Lihat semua kuliner ${icon('arrow', 18)}</a></div>
-        ${grid(D.places)}</div></section>
+          <div class="d-flex align-items-center gap-2"><a class="btn btn-sr-outline" href="jelajah.html">Lihat semua kuliner ${icon('arrow', 18)}</a>
+            <button class="sr-arrow prev" type="button" data-scroll="-1" aria-label="Geser ke kuliner sebelumnya">${icon('arrow', 20)}</button>
+            <button class="sr-arrow" type="button" data-scroll="1" aria-label="Geser ke kuliner berikutnya">${icon('arrow', 20)}</button></div></div>
+        <div class="sr-carousel">${grid(D.places)}</div></div></section>
+      <section class="container-xl py-5" aria-labelledby="h-about"><div class="row g-4 align-items-center">
+        <div class="col-lg-5"><h2 id="h-about" class="mb-2">Tentang SoloRasa</h2>
+          <p class="text-muted-sr mb-0">SoloRasa adalah katalog kuliner Kota Solo untuk wisatawan dan warga yang ingin makan enak tanpa bingung. Semua info penting dikumpulkan di satu tempat, jadi kamu bisa memilih sebelum berangkat.</p></div>
+        <div class="col-lg-7"><ul class="list-unstyled row row-cols-1 row-cols-sm-3 g-3 mb-0">
+          ${[['utensils', 'Menu & penjelasan', 'Daftar menu tiap tempat lengkap dengan cerita dan isi hidangannya.'],
+             ['wallet', 'Harga & stok', 'Kisaran harga per orang dan status menu: READY, HABIS, atau belum terkonfirmasi.'],
+             ['map', 'Lokasi & rute', 'Alamat, jam buka, petunjuk arah, dan rute kuliner setengah hari.']]
+            .map(([ic, t, d]) => `<li class="col"><div class="panel h-100"><span class="about-ic">${icon(ic, 22)}</span><h3 class="h6 fw-bold mt-3 mb-1" style="font-family:var(--sr-body)">${t}</h3><p class="small text-muted-sr mb-0">${d}</p></div></li>`).join('')}
+        </ul></div></div>
+        <p class="small-note mt-3 mb-0">Dibuat oleh Kelompok 1, Pendidikan Teknik Informatika dan Komputer, FKIP Universitas Sebelas Maret. Data masih contoh; konfirmasi harga dan ketersediaan ke penjual.</p></section>
       <section class="container-xl py-5" aria-labelledby="h-peta"><h2 id="h-peta" class="mb-1">Temukan lokasi tempat makan</h2>
         <p class="text-muted-sr">Lihat rekomendasi tempat dan petunjuk arah dari lokasimu.</p>
         <iframe class="map-img mb-3" src="https://maps.google.com/maps?q=Surakarta&z=14&output=embed" title="Peta Kota Solo" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="aspect-ratio:16/9"></iframe>
         <a class="btn btn-sr" href="peta.html">${icon('map', 18)} Buka peta kuliner</a></section>`;
+    const row = main.querySelector('.sr-carousel > .row');
+    main.querySelectorAll('[data-scroll]').forEach(b => b.addEventListener('click', () =>
+      row.scrollBy({ left: +b.dataset.scroll * row.clientWidth * .8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })));
   }
 
   function readFilters() {
@@ -226,9 +252,11 @@
             <h1 class="mb-2">${esc(p.name)}</h1>
             <p class="mb-1 text-muted-sr">${esc(p.dish)} · ${esc(p.label)} · <span class="rating">★ ${p.rating}</span> (${p.ratingCount} ulasan Google)</p>
             <p class="small text-muted-sr">Buka ${hours(p)} · <b class="${open ? 'text-success' : ''}">${open ? 'Sedang buka' : 'Sedang tutup'}</b> · status berbeda per menu, lihat di bawah</p>
-            <img class="w-100 rounded-4 my-3" style="aspect-ratio:16/9;object-fit:cover" src="${p.hero || p.img}" alt="${esc(p.heroAlt || p.imgAlt)}" width="1280" height="720">
+            <img class="w-100 rounded-4 my-3" style="aspect-ratio:16/9;object-fit:cover;object-position:center 25%;height:auto" src="${p.hero || p.img}" alt="${esc(p.heroAlt || p.imgAlt)}" width="1280" height="720">
             <h2 class="mt-4">Menu dan harga</h2>
-            <ul class="list-unstyled d-grid gap-2 mt-3">${p.menu.map(m => `<li class="panel py-3"><div class="menu-row"><b>${esc(m.name)}</b><span class="price">${esc(m.price || 'Tanya penjual')}</span></div><div class="small text-muted-sr">${esc(m.desc)}</div></li>`).join('')}</ul>
+            <p class="text-muted-sr mb-0">${esc(p.desc)}</p>
+            <ul class="list-unstyled d-grid gap-2 mt-3">${p.menu.map(m => `<li class="panel py-3"><div class="menu-row"><b>${esc(m.name)}</b><span class="price">${esc(m.price || 'Tanya penjual')}</span></div><div class="small text-muted-sr">${esc(m.desc)}</div>
+              ${m.info ? `<details class="menu-info"><summary>Penjelasan menu</summary><p>${esc(m.info)}</p></details>` : ''}</li>`).join('')}</ul>
             <p class="small-note">Harga menu tanpa sumber ditulis “Tanya penjual”. Harga per orang ${esc(p.priceText)} dari ${esc(p.source)}.</p>
             <div class="d-flex flex-column flex-sm-row gap-2 my-3">
               <button class="btn btn-sr flex-fill" type="button" data-bs-toggle="modal" data-bs-target="#wa">${icon('chat', 18)} Hubungi via WhatsApp</button>
@@ -305,7 +333,10 @@
           <div class="d-flex flex-wrap gap-2 mt-2"><a class="btn btn-sr btn-sm" href="${SR.dirUrl(p)}" target="_blank" rel="noopener">${icon('nav', 16)} Petunjuk arah</a><button class="btn btn-sr-outline btn-sm" type="button" data-map="${p.id}">${icon('map', 16)} Lihat di peta</button><a class="btn btn-sr-outline btn-sm" href="detail.html?id=${p.id}">Lihat menu dan harga</a></div></div></li>`).join('');
       if (list[0]) showMap(list[0]);
     };
-    $('#p-list').addEventListener('click', e => { const b = e.target.closest('[data-map]'); if (b) showMap(D.places.find(p => p.id === b.dataset.map)); });
+    $('#p-list').addEventListener('click', e => { const b = e.target.closest('[data-map]'); if (!b) return;
+      showMap(D.places.find(p => p.id === b.dataset.map));
+      const m = $('#p-map'), r = m.getBoundingClientRect(); // HP: peta ada di atas daftar, gulir ke sana agar perubahan terlihat
+      if (r.bottom < 0 || r.top > innerHeight) m.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); });
     $('#p-area').addEventListener('change', e => { state.area = e.target.value; render(); });
     $('#p-open').addEventListener('change', e => { state.openNow = e.target.checked; render(); });
     const download = (text, name) => {
@@ -323,6 +354,8 @@
   }
 
   /* ---------- mulai ---------- */
+  // animasi masuk header hanya sekali per kunjungan; pindah menu memakai transisi halaman (style.css)
+  try { if (!sessionStorage.getItem('sr-masuk')) { document.documentElement.classList.add('sr-first'); sessionStorage.setItem('sr-masuk', '1'); } } catch (e) { /* mode privat: lewati animasi */ }
   shell();
   const main = document.getElementById('main');
   // ?gagal=1 mensimulasikan data gagal dimuat (untuk uji tugas T7)
