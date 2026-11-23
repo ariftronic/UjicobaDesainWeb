@@ -255,13 +255,6 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
 .sr-arrow:hover { background: rgba(43, 37, 34, .16); }
 .sr-arrow.prev svg { transform: scaleX(-1); }
 
-/* Motif batik parang transparan di sisi kiri hero, memudar ke arah foto agar teks tetap terbaca */
-.sr-hero::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 55%; z-index: 1; pointer-events: none; opacity: .14;
-  background: url("../img/batik-parang.webp") left center / cover no-repeat;
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, .6) 45%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, .6) 45%, transparent 100%); }
-@media (max-width: 991.98px) { .sr-hero::after { inset: auto 0 0 0; width: 100%; height: 55%;
-  -webkit-mask-image: linear-gradient(0deg, #000 0%, transparent 100%); mask-image: linear-gradient(0deg, #000 0%, transparent 100%); } }
-
 /* Bar "Contoh data" ala bar pengumuman Apple: rata tengah, latar krem selebar layar */
 .sr-note { text-align: center; background: var(--sr-accent); box-shadow: 0 0 0 100vmax var(--sr-accent); clip-path: inset(0 -100vmax); }
 
@@ -278,8 +271,13 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
 }
 @keyframes sr-header-shadow { to { box-shadow: 0 6px 24px rgba(92, 61, 46, .12); } }
 
-/* Batik hero tersibak dari kiri ke kanan saat halaman dibuka */
+/* Batik mengalir seperti akar bercabang dari kiri: batang -> cabang -> ranting, ujungnya makin tipis.
+   Isi garis = motif parang (pattern SVG). Default terlihat; animasi tumbuh hanya bila gerak tidak dikurangi. */
+.hero-batik { position: absolute; left: 0; top: 0; height: 100%; width: min(62%, 820px); z-index: 1; pointer-events: none; opacity: .22; }
+.hero-batik path { fill: none; stroke: url(#batik-parang); stroke-linecap: round; stroke-dasharray: 1; }
+@media (max-width: 991.98px) { .hero-batik { top: auto; bottom: 0; height: 55%; width: 100%; } }
 @media (prefers-reduced-motion: no-preference) {
-  .sr-hero::after { animation: sr-batik-in 1.4s cubic-bezier(.65, 0, .35, 1) .15s both; }
+  .hero-batik path { animation: sr-root .9s cubic-bezier(.4, 0, .2, 1) both; }
+  .hero-batik .l2 { animation-delay: .55s; } .hero-batik .l3 { animation-delay: 1.05s; }
 }
-@keyframes sr-batik-in { from { clip-path: inset(0 100% 0 0); opacity: 0; } to { clip-path: inset(0 0 0 0); } }
+@keyframes sr-root { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
