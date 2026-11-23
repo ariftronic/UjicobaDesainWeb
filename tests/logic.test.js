@@ -23,7 +23,7 @@ assert.equal(SR.applyFilters(places, { ...base, q: 'pizza' }, m('10:00')).length
 
 // kategori: label vs jenis; Street Food belum ada datanya
 assert.deepEqual(names(SR.applyFilters(places, { ...base, category: 'Jajanan' }, 0)), ['Serabi Notosuman']);
-assert.equal(SR.applyFilters(places, { ...base, category: 'Legendaris' }, 0).length, 2);
+assert.equal(SR.applyFilters(places, { ...base, category: 'Legend' }, 0).length, 2);
 assert.equal(SR.applyFilters(places, { ...base, category: 'Street Food' }, 0).length, 0);
 
 // harga (tumpang tindih rentang) dan validasi
@@ -69,3 +69,9 @@ assert.equal(SR.planRoute({ start: '06:00', stops: [{ id: 'timlo-sastro', travel
 assert.equal(SR.routeUrl(pagi).split('%7C').length, 2);
 assert.equal(SR.routeCsv(routes[0], pagi).split('\r\n')[2].split(',')[0], '1');
 console.log('logic tests passed');
+
+// rute bebas: nama katalog -> alamat lengkap; asal kosong -> tanpa origin (lokasi pengguna)
+const own = SR.customRouteUrl('', 'timlo sastro', places);
+assert.ok(decodeURIComponent(own).includes('Jl. Abdul Muis') && !own.includes('origin='));
+assert.ok(decodeURIComponent(SR.customRouteUrl('Stasiun Solo Balapan', 'Timlo Sastro', places)).includes('origin=Stasiun Solo Balapan'));
+console.log('custom route tests passed');

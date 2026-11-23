@@ -115,7 +115,7 @@
   function home(main) {
     // foto kategori diambil dari tempat yang cocok, utamakan foto yang belum dipakai; kategori tanpa data tidak ditampilkan
     const used = new Set();
-    const tiles = ['Legendaris', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Street Food', 'Murah'].map(t => {
+    const tiles = ['Legend', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Street Food', 'Murah'].map(t => {
       const ps = D.places.filter(p => SR.matchesCategory(p, t)); if (!ps.length) return null;
       const p = ps.find(x => !used.has(x.img)) || ps[0]; used.add(p.img); return [t, p.img];
     }).filter(Boolean);
@@ -137,7 +137,7 @@
         <div class="sr-scroll"><div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">${tiles.map(([t, img]) => `<div class="col"><a class="tile" href="jelajah.html?kategori=${encodeURIComponent(t)}"><span>${t}</span><img src="${img}" alt="" loading="lazy" width="640" height="480"></a></div>`).join('')}</div></div></section>
       <section class="py-5" style="background:var(--sr-accent)" aria-labelledby="h-pil"><div class="container-xl">
         <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
-          <div><h2 id="h-pil" class="mb-1">Pilihan Kuliner Solo</h2><p class="text-muted-sr mb-0">Legendaris, murah, dan favorit wisatawan.</p></div>
+          <div><h2 id="h-pil" class="mb-1">Pilihan Kuliner Solo</h2><p class="text-muted-sr mb-0">Legend, murah, dan favorit wisatawan.</p></div>
           <div class="d-flex align-items-center gap-2"><a class="btn btn-sr-outline" href="jelajah.html">Lihat semua kuliner ${icon('arrow', 18)}</a>
             <button class="sr-arrow prev" type="button" data-scroll="-1" aria-label="Geser ke kuliner sebelumnya">${icon('arrow', 20)}</button>
             <button class="sr-arrow" type="button" data-scroll="1" aria-label="Geser ke kuliner berikutnya">${icon('arrow', 20)}</button></div></div>
@@ -180,7 +180,7 @@
     const chips = SR.activeChips(f);
     const filtered = chips.length > 0;
     const quick = [['Semua', () => ({ ...f, category: 'Semua', openNow: false }), f.category === 'Semua' && !f.openNow],
-      ['Legendaris', () => ({ ...f, category: 'Legendaris' }), f.category === 'Legendaris'], ['Murah', () => ({ ...f, category: 'Murah' }), f.category === 'Murah'],
+      ['Legend', () => ({ ...f, category: 'Legend' }), f.category === 'Legend'], ['Murah', () => ({ ...f, category: 'Murah' }), f.category === 'Murah'],
       ['Buka sekarang', () => ({ ...f, openNow: !f.openNow }), f.openNow]];
     const areas = ['Semua', ...new Set(D.places.map(p => p.area))];
     const cats = ['Semua', ...D.categories.filter(c => c === f.category || D.places.some(p => SR.matchesCategory(p, c)))];
@@ -309,6 +309,16 @@
           </div></div>
         <section class="mt-5" aria-labelledby="h-rute"><h2 id="h-rute" class="mb-1">Rute Kuliner ½ Hari di Solo</h2>
           <p class="text-muted-sr">Dua rute sesuai jam buka. Waktu perjalanan adalah perkiraan; cek ulang di Google Maps sebelum berangkat.</p>
+          <form class="panel mb-4" id="own-route"><h3 class="h5 mb-3">Buat rute sendiri</h3>
+            <datalist id="place-list">${D.places.map(p => `<option value="${esc(p.name)}">`).join('')}</datalist>
+            <div class="row g-3 align-items-end">
+              <div class="col-md"><label class="form-label small fw-bold" for="r-from">Mulai dari</label>
+                <input class="form-control" id="r-from" list="place-list" placeholder="Kosongkan = lokasimu sekarang" autocomplete="off"></div>
+              <div class="col-md"><label class="form-label small fw-bold" for="r-to">Sampai di</label>
+                <input class="form-control" id="r-to" list="place-list" placeholder="Pilih tempat atau ketik alamat" autocomplete="off" required></div>
+              <div class="col-md-auto"><button class="btn btn-sr w-100" type="submit">${icon('nav', 18)} Lihat rute</button></div>
+            </div>
+            <p class="small-note mt-2 mb-0">Pilih nama tempat dari daftar, atau ketik alamat lain seperti stasiun atau hotel. Rute dibuka di Google Maps.</p></form>
           <div class="row g-4">${D.routes.map(r => { const plan = SR.planRoute(r, D.places), end = plan[plan.length - 1].leave; return `
             <div class="col-lg-6"><article class="panel h-100 d-flex flex-column">
               <h3 class="h4 mb-1">${esc(r.name)}</h3>
@@ -320,6 +330,8 @@
               <div class="d-flex flex-wrap gap-2 mt-auto"><a class="btn btn-sr btn-sm" href="${SR.routeUrl(plan)}" target="_blank" rel="noopener">${icon('nav', 16)} Buka rute di Google Maps</a>
                 <button class="btn btn-sr-outline btn-sm" type="button" data-route-csv="${r.id}">${icon('download', 16)} Unduh CSV (Excel)</button></div>
             </article></div>`; }).join('')}</div></section></div>`;
+    $('#own-route').addEventListener('submit', e => { e.preventDefault();
+      window.open(SR.customRouteUrl($('#r-from').value, $('#r-to').value, D.places), '_blank', 'noopener'); });
     const current = () => SR.recommend(D.places, SR.nowWib()).filter(p => (state.area === 'Semua' || p.area === state.area) && (!state.openNow || p.isOpen));
     const showMap = p => { const m = $('#p-map'); m.src = SR.embedUrl(p); m.title = 'Peta lokasi ' + p.name; };
     const render = () => {

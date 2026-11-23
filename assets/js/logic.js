@@ -1,6 +1,6 @@
 /* Logika murni SoloRasa (tanpa DOM) — dipakai halaman dan diuji di tests/logic.test.js */
 (function (root) {
-  const LABELS = ['Legendaris', 'Favorit', 'Murah'];
+  const LABELS = ['Legend', 'Favorit', 'Murah'];
 
   function toMin(hhmm) { const [h, m] = String(hhmm).split(':').map(Number); return h * 60 + (m || 0); }
 
@@ -97,6 +97,11 @@
     const q = plan.map(s => encodeURIComponent(mapsQuery(s.p)));
     return 'https://www.google.com/maps/dir/?api=1&destination=' + q[q.length - 1] + (q.length > 1 ? '&waypoints=' + q.slice(0, -1).join('%7C') : '');
   }
+  // rute bebas: nama tempat katalog diganti alamat lengkapnya; teks lain dipakai apa adanya; tanpa asal = lokasi pengguna
+  function customRouteUrl(from, to, places) {
+    const q = v => { const p = places.find(x => x.name.toLowerCase() === v.trim().toLowerCase()); return p ? mapsQuery(p) : v.trim(); };
+    return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(q(to)) + (from.trim() ? '&origin=' + encodeURIComponent(q(from)) : '');
+  }
   const ROUTE_COLS = ['Urutan', 'Nama', 'Alamat', 'Perjalanan dari sebelumnya (menit)', 'Tiba', 'Selesai', 'Lama di tempat (menit)', 'Jam buka', 'Link Google Maps'];
   function routeCsv(route, plan) {
     return csv([[route.name], ROUTE_COLS, ...plan.map(s => [s.n, s.p.name, s.p.address, s.travel, fmtMin(s.arrive), fmtMin(s.leave), s.stay,
@@ -105,6 +110,6 @@
   }
   function toTsv(list) { return [COLS, ...rowsFor(list)].map(r => r.map(v => String(v ?? '').replace(/[\t\n]/g, ' ')).join('\t')).join('\n'); }
 
-  const api = { toMin, isOpenAt, nowWib, readyCount, matchesQuery, matchesCategory, validatePrice, applyFilters, recommend, activeChips, dirUrl, searchUrl, embedUrl, toCsv, toTsv, COLS, fmtMin, planRoute, routeUrl, routeCsv };
+  const api = { toMin, isOpenAt, nowWib, readyCount, matchesQuery, matchesCategory, validatePrice, applyFilters, recommend, activeChips, dirUrl, searchUrl, embedUrl, toCsv, toTsv, COLS, fmtMin, planRoute, routeUrl, routeCsv, customRouteUrl };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.SR = api;
 })(typeof window !== 'undefined' ? window : globalThis);
