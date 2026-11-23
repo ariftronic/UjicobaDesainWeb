@@ -260,7 +260,7 @@
             <img class="w-100 rounded-4 my-3" style="aspect-ratio:16/9;object-fit:cover;object-position:center 25%;height:auto" src="${p.hero || p.img}" alt="${esc(p.heroAlt || p.imgAlt)}" width="1280" height="720">
             <h2 class="mt-4">Menu dan harga</h2>
             <p class="text-muted-sr mb-0">${esc(p.desc)}</p>
-            <ul class="list-unstyled d-grid gap-2 mt-3">${p.menu.map(m => `<li class="panel py-3"><div class="menu-row"><b>${esc(m.name)}</b><span class="price">${esc(m.price || 'Tanya penjual')}</span></div><div class="small text-muted-sr">${esc(m.desc)}</div>
+            <ul class="list-unstyled d-grid gap-2 mt-3">${p.menu.map((m, i) => `${m.group && m.group !== (p.menu[i - 1] || {}).group ? `<li class="menu-group">${esc(m.group)}</li>` : ''}<li class="panel py-3"><div class="menu-row"><b>${esc(m.name)}</b><span class="price">${esc(m.price || 'Tanya penjual')}</span></div><div class="small text-muted-sr">${esc(m.desc)}</div>
               ${m.info ? `<details class="menu-info"><summary>Penjelasan menu</summary><p>${esc(m.info)}</p></details>` : ''}</li>`).join('')}</ul>
             <p class="small-note">Harga menu tanpa sumber ditulis “Tanya penjual”. Harga per orang ${esc(p.priceText)} dari ${esc(p.source)}.</p>
             <div class="d-flex flex-column flex-sm-row gap-2 my-3">

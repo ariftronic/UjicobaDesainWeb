@@ -276,3 +276,7 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
 @media (max-width: 991.98px) { .hero-batik { top: auto; bottom: 0; height: 55%; width: 100%; } }
 @media (prefers-reduced-motion: no-preference) { .hero-batik { animation: sr-wave-in 1.4s cubic-bezier(.2, .8, .2, 1) .1s both; } }
 @keyframes sr-wave-in { from { transform: translateX(-100%); opacity: 0; } }
+
+/* Subjudul kelompok menu (Bakaran, Masakan, Nasi) bila data menu punya group */
+.menu-group { margin-top: .75rem; font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sr-muted-fg); }
+.menu-group:first-child { margin-top: 0; }
