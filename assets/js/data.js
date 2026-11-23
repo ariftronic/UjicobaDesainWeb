@@ -5,7 +5,7 @@ window.SOLORASA_DATA = {
   checkedAt: '22 Nov 2026',
   places: [
     {
-      id: 'selat-mbak-lies', name: 'Warung Selat Mbak Lies', category: 'Makanan Berat', label: 'Legendaris', dish: 'Selat Solo',
+      id: 'selat-mbak-lies', name: 'Warung Selat Mbak Lies', category: 'Makanan Berat', label: 'Legend', dish: 'Selat Solo',
       desc: 'Selat Solo legendaris: bistik jawa dan selat galantine berkuah manis.',
       address: 'Jl. Yudhistira No. 9, Serengan, Surakarta', area: 'Serengan',
       open: '08:00', close: '18:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
@@ -45,7 +45,7 @@ window.SOLORASA_DATA = {
       ]
     },
     {
-      id: 'timlo-sastro', name: 'Timlo Sastro', category: 'Makanan Berat', label: 'Legendaris', dish: 'Makanan Berat',
+      id: 'timlo-sastro', name: 'Timlo Sastro', category: 'Makanan Berat', label: 'Legend', dish: 'Makanan Berat',
       desc: 'Timlo kuah bening dengan sosis solo dan hati; kini di Jl. Abdul Muis No. 32A.',
       address: 'Jl. Abdul Muis No. 32A, Kepatihan Kulon, Jebres, Surakarta', area: 'Jebres',
       open: '08:00', close: '15:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
@@ -104,6 +104,6 @@ window.SOLORASA_DATA = {
     { id: 'facebook', name: 'Facebook', url: 'https://www.facebook.com/' },
     { id: 'threads', name: 'Threads', url: 'https://www.threads.net/' }
   ],
-  categories: ['Legendaris', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Street Food', 'Murah'],
+  categories: ['Legend', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Street Food', 'Murah'],
   credits: 'Foto: Wikimedia Commons — Aqilla Rahmi (CC BY 4.0), Gunawan Kartapranata, Meursault2004, Nasudi (CC BY-SA), Midori (CC BY 3.0), ESCapade (CC BY-SA 3.0), Sam Hidayat (Pasar Gede, CC BY-SA 4.0). Peta: Google Maps.'
 };
