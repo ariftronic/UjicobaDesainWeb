@@ -277,3 +277,9 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
   .sr-header { animation: sr-header-shadow linear both; animation-timeline: scroll(); animation-range: 0 120px; }
 }
 @keyframes sr-header-shadow { to { box-shadow: 0 6px 24px rgba(92, 61, 46, .12); } }
+
+/* Batik hero tersibak dari kiri ke kanan saat halaman dibuka */
+@media (prefers-reduced-motion: no-preference) {
+  .sr-hero::after { animation: sr-batik-in 1.4s cubic-bezier(.65, 0, .35, 1) .15s both; }
+}
+@keyframes sr-batik-in { from { clip-path: inset(0 100% 0 0); opacity: 0; } to { clip-path: inset(0 0 0 0); } }
