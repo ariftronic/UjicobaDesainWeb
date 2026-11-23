@@ -17,7 +17,7 @@ assert.equal(SR.isOpenAt('07:00', '24:00', m('23:59')), true);
 assert.equal(SR.isOpenAt('08:00', '18:00', m('18:00')), false);
 
 // pencarian: nama menu, area, tanpa beda huruf besar/kecil
-assert.deepEqual(names(SR.applyFilters(places, { ...base, q: 'tengkleng' }, m('10:00'))), ['Sate Kambing Tambak Segaran']);
+assert.deepEqual(names(SR.applyFilters(places, { ...base, q: 'tengkleng' }, m('10:00'))), ['Sate Kambing & Tengkleng Pak Manto']);
 assert.deepEqual(names(SR.applyFilters(places, { ...base, q: 'SERENGAN' }, m('10:00'))), ['Warung Selat Mbak Lies', 'Serabi Notosuman']);
 assert.equal(SR.applyFilters(places, { ...base, q: 'pizza' }, m('10:00')).length, 0);
 
@@ -42,7 +42,7 @@ assert.equal(SR.applyFilters(places, { ...base, promo: true }, 0).length, 0);
 assert.deepEqual(names(SR.applyFilters(places, { ...base, openNow: true }, m('00:30'))), ['Nasi Liwet Wongso Lemu']);
 
 // rekomendasi: buka dulu, lalu menu READY terbanyak, lalu termurah
-assert.equal(SR.recommend(places, m('20:00'))[0].name, 'Sate Kambing Tambak Segaran');
+assert.equal(SR.recommend(places, m('17:00'))[0].name, 'Sate Kambing & Tengkleng Pak Manto');
 
 // chip filter aktif
 assert.deepEqual(SR.activeChips({ ...base, category: 'Jajanan', max: 50000, status: 'READY' }).map(c => c.key), ['category', 'price', 'status']);
