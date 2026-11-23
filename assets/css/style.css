@@ -254,3 +254,10 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
   transition: background-color var(--sr-dur) ease-out; }
 .sr-arrow:hover { background: rgba(43, 37, 34, .16); }
 .sr-arrow.prev svg { transform: scaleX(-1); }
+
+/* Motif batik parang transparan di sisi kiri hero, memudar ke arah foto agar teks tetap terbaca */
+.sr-hero::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 55%; z-index: 1; pointer-events: none; opacity: .14;
+  background: url("../img/batik-parang.webp") left center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, .6) 45%, transparent 100%); mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, .6) 45%, transparent 100%); }
+@media (max-width: 991.98px) { .sr-hero::after { inset: auto 0 0 0; width: 100%; height: 55%;
+  -webkit-mask-image: linear-gradient(0deg, #000 0%, transparent 100%); mask-image: linear-gradient(0deg, #000 0%, transparent 100%); } }
