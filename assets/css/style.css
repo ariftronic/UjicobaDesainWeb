@@ -271,13 +271,8 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
 }
 @keyframes sr-header-shadow { to { box-shadow: 0 6px 24px rgba(92, 61, 46, .12); } }
 
-/* Batik mengalir seperti akar bercabang dari kiri: batang -> cabang -> ranting, ujungnya makin tipis.
-   Isi garis = motif parang (pattern SVG). Default terlihat; animasi tumbuh hanya bila gerak tidak dikurangi. */
-.hero-batik { position: absolute; left: 0; top: 0; height: 100%; width: min(62%, 820px); z-index: 1; pointer-events: none; opacity: .22; }
-.hero-batik path { fill: none; stroke: url(#batik-parang); stroke-linecap: round; stroke-dasharray: 1; }
+/* Batik dari kiri dengan tepi kanan bergelombang; gelombang bergerak pelan (SMIL di app.js), masuk meluncur ke kanan */
+.hero-batik { position: absolute; left: 0; top: 0; height: 100%; width: min(62%, 820px); z-index: 1; pointer-events: none; opacity: .2; }
 @media (max-width: 991.98px) { .hero-batik { top: auto; bottom: 0; height: 55%; width: 100%; } }
-@media (prefers-reduced-motion: no-preference) {
-  .hero-batik path { animation: sr-root .9s cubic-bezier(.4, 0, .2, 1) both; }
-  .hero-batik .l2 { animation-delay: .55s; } .hero-batik .l3 { animation-delay: 1.05s; }
-}
-@keyframes sr-root { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: no-preference) { .hero-batik { animation: sr-wave-in 1.4s cubic-bezier(.2, .8, .2, 1) .1s both; } }
+@keyframes sr-wave-in { from { transform: translateX(-100%); opacity: 0; } }
