@@ -122,6 +122,27 @@
     main.innerHTML = `
       <section class="sr-hero">
         <img class="hero-bg" src="assets/img/hero-pasar-gede.webp" alt="" width="1280" height="720" fetchpriority="high">
+        <svg class="hero-batik" viewBox="0 0 700 500" preserveAspectRatio="xMinYMid slice" aria-hidden="true" focusable="false">
+          <defs><pattern id="batik-parang" patternUnits="userSpaceOnUse" width="110" height="110"><image href="assets/img/batik-parang.webp" width="110" height="110"/></pattern></defs>
+          <path class="l1" pathLength="1" stroke-width="56" d="M0 140 C120 130 200 180 320 170 S480 120 560 150"/>
+          <path class="l1" pathLength="1" stroke-width="50" d="M0 360 C100 370 180 330 280 345 S420 400 500 390"/>
+          <path class="l1" pathLength="1" stroke-width="30" d="M0 40 C80 50 140 30 220 45"/>
+          <path class="l1" pathLength="1" stroke-width="26" d="M0 470 C60 465 110 480 170 470"/>
+          <path class="l2" pathLength="1" stroke-width="30" d="M320 170 C380 200 420 250 500 260"/>
+          <path class="l2" pathLength="1" stroke-width="26" d="M220 168 C260 120 300 90 360 70"/>
+          <path class="l2" pathLength="1" stroke-width="26" d="M280 345 C330 300 370 290 430 300"/>
+          <path class="l2" pathLength="1" stroke-width="24" d="M150 352 C190 400 230 430 300 445"/>
+          <path class="l2" pathLength="1" stroke-width="16" d="M560 150 C600 140 630 120 670 115"/>
+          <path class="l2" pathLength="1" stroke-width="14" d="M500 390 C540 380 570 360 620 362"/>
+          <path class="l3" pathLength="1" stroke-width="14" d="M500 260 C540 262 570 245 610 250"/>
+          <path class="l3" pathLength="1" stroke-width="12" d="M500 260 C530 285 545 310 580 330"/>
+          <path class="l3" pathLength="1" stroke-width="12" d="M360 70 C400 55 430 60 470 40"/>
+          <path class="l3" pathLength="1" stroke-width="12" d="M560 150 C600 165 625 185 660 190"/>
+          <path class="l3" pathLength="1" stroke-width="12" d="M430 300 C470 305 500 290 540 296"/>
+          <path class="l3" pathLength="1" stroke-width="10" d="M300 445 C340 452 370 470 410 470"/>
+          <path class="l3" pathLength="1" stroke-width="10" d="M500 390 C535 410 555 430 600 440"/>
+          <path class="l3" pathLength="1" stroke-width="12" d="M220 45 C260 52 290 40 330 48"/>
+        </svg>
         <div class="container-xl position-relative py-5"><div class="row"><div class="col-lg-6 py-lg-5">
           <h1>Jelajahi Kuliner Solo Tanpa Ribet</h1>
           <p class="fs-5 text-muted-sr">Cari makanan, harga, porsi, stok, dan informasi penting dalam satu tempat.</p>
