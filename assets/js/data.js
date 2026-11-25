@@ -32,7 +32,7 @@ window.SOLORASA_DATA = {
       menu: [ { name: 'Nasi liwet suwir ayam', price: null, desc: 'Nasi gurih, suwir ayam, labu siam, telur, areh · 1 porsi', status: 'READY', info: 'Nasi liwet khas Solo dimasak dengan santan, daun salam, dan serai sehingga gurih. Disajikan di atas daun pisang dengan sayur labu siam, suwiran ayam, telur, dan areh (santan kental yang dimasak).' } ]
     },
     {
-      id: 'serabi-notosuman', name: 'Serabi Notosuman', category: 'Jajanan', label: 'Murah', dish: 'Jajanan',
+      id: 'serabi-notosuman', name: 'Serabi Notosuman', category: 'Jajanan', label: 'Legend', dish: 'Jajanan',
       desc: 'Serabi santan legendaris sejak 1923, rasa original dan cokelat.',
       address: 'Jl. Moh. Yamin No. 28, Jayengan, Serengan, Surakarta', area: 'Serengan',
       open: '05:00', close: '17:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
@@ -50,7 +50,7 @@ window.SOLORASA_DATA = {
       address: 'Jl. Abdul Muis No. 32A, Kepatihan Kulon, Jebres, Surakarta', area: 'Jebres',
       open: '08:00', close: '15:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
       rating: '4,5', ratingCount: '3.298', phone: null,
-      img: 'assets/img/timlo.webp', imgAlt: 'Semangkuk timlo Sastro dengan sosis solo dan telur',
+      img: 'assets/img/timlo.webp', imgAlt: 'Gerobak warung Timlo Sastro dengan tumpukan mangkuk dan dua penjual berkaus putih',
       source: 'Google Maps (Timlo Sastro 1)', porsi: '1 porsi.',
       menu: [ { name: 'Timlo komplit', price: null, desc: 'Kuah bening, sosis solo, telur pindang, hati ampela · 1 porsi', status: 'BELUM', info: 'Sup kuah bening dari kaldu ayam dengan bumbu ringan. Isinya sosis solo (dadar gulung berisi daging), telur pindang, serta hati dan ampela; biasanya dimakan dengan nasi.' } ]
     },
@@ -109,15 +109,6 @@ window.SOLORASA_DATA = {
       { id: 'sate-pak-manto', travel: 0, stay: 60 },
       { id: 'nasi-liwet-wongso-lemu', travel: 10, stay: 45 },
       { id: 'wedangan-pak-no', travel: 15, stay: 60 } ] }
-  ],
-  /* shortcut: tautan masih ke beranda tiap platform, ganti dengan URL akun SoloRasa/kelompok setelah akunnya dibuat */
-  social: [
-    { id: 'youtube', name: 'YouTube', url: 'https://www.youtube.com/' },
-    { id: 'x', name: 'X', url: 'https://x.com/' },
-    { id: 'tiktok', name: 'TikTok', url: 'https://www.tiktok.com/' },
-    { id: 'instagram', name: 'Instagram', url: 'https://www.instagram.com/' },
-    { id: 'facebook', name: 'Facebook', url: 'https://www.facebook.com/' },
-    { id: 'threads', name: 'Threads', url: 'https://www.threads.net/' }
   ],
   categories: ['Legend', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Street Food', 'Murah'],
   credits: 'Foto: Wikimedia Commons — Aqilla Rahmi (CC BY 4.0), Gunawan Kartapranata, Meursault2004, Nasudi (CC BY-SA), Midori (CC BY 3.0), ESCapade (CC BY-SA 3.0), Sam Hidayat (Pasar Gede, CC BY-SA 4.0). Peta: Google Maps.'

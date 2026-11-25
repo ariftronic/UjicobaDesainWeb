@@ -1,6 +1,7 @@
 /* Logika murni SoloRasa (tanpa DOM) — dipakai halaman dan diuji di tests/logic.test.js */
 (function (root) {
-  const LABELS = ['Legend', 'Favorit', 'Murah'];
+  const LABELS = ['Legend', 'Favorit'];
+  const MURAH = 20000; // batas harga mulai per orang; samakan dengan catatan di filter (app.js)
 
   function toMin(hhmm) { const [h, m] = String(hhmm).split(':').map(Number); return h * 60 + (m || 0); }
 
@@ -15,19 +16,18 @@
     return +parts.find(p => p.type === 'hour').value * 60 + +parts.find(p => p.type === 'minute').value;
   }
 
-  function readyCount(place) { return place.menu.filter(m => m.status === 'READY').length; }
-
   const fold = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   /* Pencarian mencocokkan nama tempat, area, alamat, jenis makanan, dan nama menu (riset 5.4). */
   function matchesQuery(place, q) {
     const words = fold(q).split(/\s+/).filter(Boolean);
     if (!words.length) return true;
-    const hay = fold([place.name, place.area, place.address, place.dish, place.category, place.label, ...place.menu.map(m => m.name)].join(' '));
+    const hay = fold([place.name, place.area, place.address, place.dish, place.category, place.label, place.priceMin < MURAH ? 'Murah' : '', ...place.menu.map(m => m.name)].join(' '));
     return words.every(w => hay.includes(w));
   }
 
   function matchesCategory(place, cat) {
     if (!cat || cat === 'Semua') return true;
+    if (cat === 'Murah') return place.priceMin < MURAH;
     return LABELS.includes(cat) ? place.label === cat : place.category === cat;
   }
 
@@ -50,11 +50,11 @@
     );
   }
 
-  /* Urutan rekomendasi: yang sedang buka, lalu yang punya lebih banyak menu READY, lalu yang lebih hemat. */
+  /* Urutan rekomendasi: yang sedang buka, lalu yang lebih hemat. Status menu masih contoh, jadi tidak ikut menentukan. */
   function recommend(places, nowMin) {
     return places
-      .map(p => ({ ...p, isOpen: isOpenAt(p.open, p.close, nowMin), ready: readyCount(p) }))
-      .sort((a, b) => (b.isOpen - a.isOpen) || (b.ready - a.ready) || (a.priceMin - b.priceMin) || a.name.localeCompare(b.name));
+      .map(p => ({ ...p, isOpen: isOpenAt(p.open, p.close, nowMin) }))
+      .sort((a, b) => (b.isOpen - a.isOpen) || (a.priceMin - b.priceMin) || a.name.localeCompare(b.name));
   }
 
   function activeChips(f) {
@@ -110,6 +110,6 @@
   }
   function toTsv(list) { return [COLS, ...rowsFor(list)].map(r => r.map(v => String(v ?? '').replace(/[\t\n]/g, ' ')).join('\t')).join('\n'); }
 
-  const api = { toMin, isOpenAt, nowWib, readyCount, matchesQuery, matchesCategory, validatePrice, applyFilters, recommend, activeChips, dirUrl, searchUrl, embedUrl, toCsv, toTsv, COLS, fmtMin, planRoute, routeUrl, routeCsv, customRouteUrl };
+  const api = { toMin, isOpenAt, nowWib, matchesQuery, matchesCategory, validatePrice, applyFilters, recommend, activeChips, dirUrl, searchUrl, embedUrl, toCsv, toTsv, COLS, fmtMin, planRoute, routeUrl, routeCsv, customRouteUrl };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.SR = api;
 })(typeof window !== 'undefined' ? window : globalThis);
