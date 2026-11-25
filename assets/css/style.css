@@ -3,7 +3,7 @@
 :root {
   --sr-bg: #FAF5EC; --sr-fg: #2B2522; --sr-card: #FFFFFF; --sr-primary: #AE5028; --sr-on-primary: #FFFFFF;
   --sr-muted-fg: #78685E; --sr-muted-fg-strong: #62584F; --sr-border: #E6D8C5; --sr-accent: #F5ECE0;
-  --sr-footer: #5C3D2E; --sr-brown: #6B4A35; --sr-rating: #8A5A12; --sr-muted: #F1EDE8;
+  --sr-footer: #5C3D2E; --sr-muted: #F1EDE8;
   --sr-ok: #25704A; --sr-ok-bg: #EAF7EE; --sr-no: #B4472D; --sr-no-bg: #FDECEC;
   --sr-display: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; /* dulu Playfair Display; samakan di Figma */
   --sr-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -12,6 +12,7 @@
   --bs-link-color: var(--sr-fg); --bs-link-hover-color: var(--sr-primary); --bs-border-color: var(--sr-border);
   /* Bootstrap 5.3 mewarnai <a> lewat varian -rgb; tanpa ini link tetap biru */
   --bs-link-color-rgb: 43, 37, 34; --bs-link-hover-color-rgb: 174, 80, 40;
+  --bs-success-rgb: 37, 112, 74; --bs-danger-rgb: 180, 71, 45; /* = --sr-ok, --sr-no; bawaan Bootstrap kurang kontras di atas krem */
 }
 body { background: var(--sr-bg); color: var(--sr-fg); line-height: 1.55; }
 h1, h2, h3, .sr-display { font-family: var(--sr-display); font-weight: 700; text-wrap: balance; }
@@ -20,6 +21,8 @@ h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
 .text-muted-sr { color: var(--sr-muted-fg) !important; }
 .small-note { font-size: .875rem; color: var(--sr-muted-fg); }
 :focus-visible { outline: 3px solid var(--sr-primary) !important; outline-offset: 2px; }
+.btn-check:focus-visible + .chip { outline: 3px solid var(--sr-primary); outline-offset: 2px; } /* radionya sendiri tak terlihat */
+.visually-hidden-focusable:focus { z-index: 1031; } /* di atas .sr-header */
 
 /* Masuk halus 200 ms, dimatikan bila pengguna meminta gerak dikurangi */
 main { animation: sr-in var(--sr-dur) ease-out; }
@@ -38,7 +41,6 @@ main { animation: sr-in var(--sr-dur) ease-out; }
 .sr-wordmark .a { color: var(--sr-primary); } .sr-wordmark .b { color: var(--sr-footer); }
 .sr-nav a { color: var(--sr-footer); text-decoration: none; padding: .7rem .25rem; min-height: 44px; display: inline-flex; align-items: center; }
 .sr-nav a[aria-current="page"] { color: var(--sr-primary); font-weight: 700; }
-.sr-note { font-size: .8125rem; color: var(--sr-muted-fg); padding-block: .5rem; }
 
 /* Tombol, chip, input: area sentuh minimal 44 px */
 .btn { min-height: 44px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
@@ -52,11 +54,12 @@ main { animation: sr-in var(--sr-dur) ease-out; }
   font-weight: 500; display: inline-flex; align-items: center; gap: .4rem; text-decoration: none; transition: background-color var(--sr-dur) ease-out; }
 .chip:hover { background: var(--sr-accent); color: var(--sr-fg); }
 .chip.active, .btn-check:checked + .chip { background: var(--sr-primary); border-color: var(--sr-primary); color: var(--sr-on-primary); font-weight: 700; }
-.form-control, .form-select { min-height: 48px; border-radius: 12px; border: 1.5px solid var(--sr-border); background-color: var(--sr-card); }
-.form-control:focus, .form-select:focus { border-color: var(--sr-primary); box-shadow: 0 0 0 .2rem rgba(180, 83, 42, .2); }
+.form-control, .form-select { min-height: 48px; border-radius: 12px; border: 1.5px solid var(--sr-muted-fg); background-color: var(--sr-card); }
+.form-check-input { border-color: var(--sr-muted-fg); }
+.form-control:focus, .form-select:focus { border-color: var(--sr-primary); box-shadow: 0 0 0 .2rem rgba(174, 80, 40, .2); }
 .form-check-input:checked { background-color: var(--sr-primary); border-color: var(--sr-primary); }
 .form-switch .form-check-input { width: 2.75rem; height: 1.5rem; cursor: pointer; }
-.form-switch .form-check-input:focus { box-shadow: 0 0 0 .2rem rgba(180, 83, 42, .2); }
+.form-switch .form-check-input:focus { box-shadow: 0 0 0 .2rem rgba(174, 80, 40, .2); }
 
 /* Kartu */
 .sr-card { background: var(--sr-card); border: 1.5px solid var(--sr-border); border-radius: 16px; overflow: hidden; height: 100%; display: flex; flex-direction: column;
@@ -67,8 +70,9 @@ main { animation: sr-in var(--sr-dur) ease-out; }
 .sr-card h3 { font-size: 1.2rem; margin: 0; }
 .sr-card .cta { margin-top: auto; padding-top: .5rem; }
 .tag { position: absolute; top: .75rem; left: .75rem; background: var(--sr-bg); color: var(--sr-primary); font: 700 .78rem var(--sr-body); padding: .3rem .7rem; border-radius: 999px; }
-.price { color: var(--sr-brown); font-weight: 700; }
-.rating { color: var(--sr-rating); font-weight: 700; white-space: nowrap; }
+.price { color: var(--sr-primary); font-weight: 700; }
+.rating { color: var(--sr-primary); font-weight: 700; white-space: nowrap; display: inline-flex; align-items: center; gap: .2rem; }
+.rating svg { fill: currentColor; }
 .panel { background: var(--sr-card); border: 1.5px solid var(--sr-border); border-radius: var(--sr-radius); padding: 1.25rem; }
 
 /* Status menu: warna + teks (tidak bergantung warna saja) */
@@ -145,7 +149,7 @@ iframe.map-img { display: block; height: auto; aspect-ratio: 4 / 3; }
 }
 
 /* Tipografi: lebih lega & terbaca di HP, judul sedikit dirapatkan agar tidak kaku */
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-block: 88px; } /* header & navigasi bawah tidak menutupi fokus */
 body { line-height: 1.6; -webkit-font-smoothing: antialiased; }
 h1, h2, h3 { letter-spacing: -.01em; line-height: 1.2; }
 h1 { line-height: 1.1; }
@@ -162,21 +166,19 @@ h1 { line-height: 1.1; }
 @media (min-width: 992px) { #p-map { position: sticky; top: 88px; } }
 
 /* Pindah menu (Beranda/Jelajah/Peta): transisi antarhalaman bawaan browser (Chrome/Edge 126+, Safari 18.2+; lainnya pindah biasa).
-   Header & navigasi bawah diberi nama sendiri agar diam, hanya isi halaman yang bergeser. */
-@view-transition { navigation: auto; }
+   Header & navigasi bawah diberi nama sendiri agar diam, hanya isi halaman yang bergeser. Aturan @view-transition ada di <head> tiap HTML. */
 .sr-header { view-transition-name: sr-header; }
 .sr-bottom-nav { view-transition-name: sr-bottom-nav; }
 ::view-transition-old(root) { animation: sr-vt-out .18s ease-in both; }
 ::view-transition-new(root) { animation: sr-vt-in .35s cubic-bezier(.2, .8, .2, 1) both; }
 @keyframes sr-vt-out { to { opacity: 0; transform: translateY(-8px); } }
 @keyframes sr-vt-in { from { opacity: 0; transform: translateY(14px); } }
-@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
 
 /* Masuk web: foto hero membesar pelan, teks muncul berurutan */
 @media (prefers-reduced-motion: no-preference) {
   .sr-hero .hero-bg { animation: sr-zoom 1.2s cubic-bezier(.2, .8, .2, 1) both; }
-  .sr-hero h1, .sr-hero p, .sr-hero form, .sr-hero .btn-sr-outline { animation: sr-up .6s cubic-bezier(.2, .8, .2, 1) both; }
-  .sr-hero p { animation-delay: .12s; } .sr-hero form { animation-delay: .24s; } .sr-hero .btn-sr-outline { animation-delay: .36s; }
+  .sr-hero h1, .sr-hero p, .sr-hero form { animation: sr-up .6s cubic-bezier(.2, .8, .2, 1) both; }
+  .sr-hero p { animation-delay: .12s; } .sr-hero form { animation-delay: .24s; }
 }
 @keyframes sr-zoom { from { opacity: 0; transform: scale(1.08); } }
 
@@ -212,7 +214,6 @@ h1 { line-height: 1.1; }
   .sr-first .sr-nav a:nth-child(3) { animation-delay: .36s; }
   .sr-first .sr-header form { animation-delay: .44s; }
   .sr-first .sr-header .btn-sr { animation-delay: .52s; }
-  .sr-first .sr-note { animation: sr-in .6s ease-out .5s both; }
   .sr-first .sr-bottom-nav { animation: sr-rise .5s cubic-bezier(.2, .8, .2, 1) .3s both; }
 }
 @keyframes sr-pop { from { opacity: 0; transform: scale(.4) rotate(-90deg); } }
@@ -223,11 +224,6 @@ h1 { line-height: 1.1; }
 /* Ikon kaca pembesar di semua kolom cari */
 input[type="search"].form-control { padding-left: 2.75rem; background: var(--sr-card) no-repeat 1rem center / 18px
   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2378685E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E"); }
-
-/* Media sosial di footer */
-.sr-footer .sr-social a { width: 44px; height: 44px; justify-content: center; border-radius: 50%; background: rgba(255, 255, 255, .1);
-  transition: background-color var(--sr-dur) ease-out, transform var(--sr-dur) ease-out; }
-.sr-footer .sr-social a:hover { background: var(--sr-primary); color: #fff; transform: translateY(-2px); }
 
 /* Gaya ala Apple & Marugame: judul sans tebal & rapat, tombol pil, kartu besar membulat */
 h1, h2, h3 { letter-spacing: -.025em; }
@@ -253,10 +249,8 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
 .sr-arrow { width: 44px; height: 44px; border-radius: 50%; border: 0; display: inline-grid; place-items: center; background: rgba(43, 37, 34, .08); color: var(--sr-fg);
   transition: background-color var(--sr-dur) ease-out; }
 .sr-arrow:hover { background: rgba(43, 37, 34, .16); }
+.sr-arrow[aria-disabled="true"] { opacity: .35; cursor: default; }
 .sr-arrow.prev svg { transform: scaleX(-1); }
-
-/* Bar "Contoh data" ala bar pengumuman Apple: rata tengah, latar krem selebar layar */
-.sr-note { text-align: center; background: var(--sr-accent); box-shadow: 0 0 0 100vmax var(--sr-accent); clip-path: inset(0 -100vmax); }
 
 /* Menu atas: garis bawah meluncur saat disorot; menu aktif tetap bergaris */
 .sr-nav a { position: relative; transition: color var(--sr-dur) ease-out; }
@@ -277,6 +271,9 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
 @media (prefers-reduced-motion: no-preference) { .hero-batik { animation: sr-wave-in 1.4s cubic-bezier(.2, .8, .2, 1) .1s both; } }
 @keyframes sr-wave-in { from { transform: translateX(-100%); opacity: 0; } }
 
-/* Subjudul kelompok menu (Bakaran, Masakan, Nasi) bila data menu punya group */
-.menu-group { margin-top: .75rem; font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sr-muted-fg); }
-.menu-group:first-child { margin-top: 0; }
+/* Kelompok menu (Bakaran, Masakan, Nasi) bila data menu punya group; dibuka/tutup dengan <details> bawaan */
+.menu-group > summary { min-height: 48px; padding-top: .75rem; cursor: pointer; font-weight: 700; border-bottom: 1.5px solid var(--sr-border); }
+
+/* Judul panel & label info diberi ikon di depan, warna merek */
+.h-ic { display: flex; align-items: center; gap: .5rem; }
+.h-ic > svg { color: var(--sr-primary); flex-shrink: 0; }
