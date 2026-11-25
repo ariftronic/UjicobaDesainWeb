@@ -63,11 +63,15 @@ assert.equal(csv.length, 9);
 assert.ok(!/null|undefined/.test(SR.toCsv(places)));
 assert.equal(csv[0].split(',').length, 13);
 assert.ok(csv[1].includes('"Jl. Yudhistira No. 9, Serengan, Surakarta"'));
+assert.ok(csv[1].includes('08:00 - 18:00'));
+// ulasan: tautan langsung ke tempatnya di Google Maps, tiap tempat punya cid sendiri
+assert.equal(SR.reviewUrl(places[0]), 'https://www.google.com/maps?cid=16580342462404552556');
+assert.equal(new Set(places.map(p => p.cid)).size, places.length);
 
 
 // embed peta Google Maps tanpa API key
 assert.ok(SR.embedUrl(places[0]).startsWith('https://maps.google.com/maps?q=') && SR.embedUrl(places[0]).endsWith('&output=embed'));
-// rute ½ hari: jam tiba/selesai berantai, semua tempat buka saat dikunjungi, link rute dan CSV
+// rute: jam tiba/selesai berantai, semua tempat buka saat dikunjungi, link rute dan CSV
 const { routes } = ctx.window.SOLORASA_DATA;
 const pagi = SR.planRoute(routes[0], places);
 assert.deepEqual(pagi.map(s => SR.fmtMin(s.arrive)), ['08.00', '08.45', '09.45']);

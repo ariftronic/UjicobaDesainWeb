@@ -1,16 +1,16 @@
 /* Data katalog SoloRasa.
    Alamat, jam, harga per orang, dan rating dicek di Google Maps dan artikel kuliner pada 22 Nov 2026
-   (coffee shop: alamat & rating Google Maps 25 Nov 2026; jam, harga, menu dari artikel Dealls). illus: true = foto ilustrasi, bukan dari tempatnya.
+   (coffee shop: alamat Google Maps 25 Nov 2026; jam, harga, menu dari artikel Dealls). Rating & jumlah ulasan: Google Maps 25 Nov 2026; cid = ID tempat di Google Maps. illus: true = foto ilustrasi, bukan dari tempatnya.
    Status menu (READY / HABIS / BELUM) adalah CONTOH: di produksi diisi penjual (mis. Firestore atau Google Sheets). */
 window.SOLORASA_DATA = {
-  checkedAt: '22 Nov 2026',
+  checkedAt: '25 Nov 2026',
   places: [
     {
       id: 'selat-mbak-lies', name: 'Warung Selat Mbak Lies', category: 'Makanan Berat', label: 'Legend', dish: 'Selat Solo',
       desc: 'Selat Solo legendaris: bistik jawa dan selat galantine berkuah manis.',
       address: 'Jl. Yudhistira No. 9, Serengan, Surakarta', area: 'Serengan', pos: [-7.5823039, 110.818147],
       open: '08:00', close: '18:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000 - 50.000',
-      rating: '4,4', ratingCount: '8.488', phone: '(0271) 653332',
+      rating: '4,4', ratingCount: '8.489', cid: '16580342462404552556', phone: '(0271) 653332',
       img: 'assets/img/selat.webp', imgAlt: 'Sepiring selat Solo berisi daging, sayur, dan kuah cokelat',
       hero: 'assets/img/selat-warung.webp', heroAlt: 'Bagian dalam Warung Selat Mbak Lies dengan hiasan gantung',
       source: 'Google Maps; detik.com', porsi: 'Semua menu 1 porsi.',
@@ -26,7 +26,7 @@ window.SOLORASA_DATA = {
       desc: 'Nasi liwet gurih dengan suwiran ayam, labu siam, telur, dan areh.',
       address: 'Jl. Teuku Umar, Keprabon, Banjarsari, Surakarta', area: 'Keprabon', pos: [-7.5695847, 110.8235705],
       open: '16:00', close: '01:00', priceMin: 17000, priceMax: 38000, priceText: 'Rp 17.000 - 38.000',
-      rating: '3,9', ratingCount: '5.251', phone: null,
+      rating: '3,9', ratingCount: '5.253', cid: '13445869066764872442', phone: null,
       img: 'assets/img/nasi-liwet.webp', imgAlt: 'Nasi liwet dengan suwiran ayam dan areh di atas daun pisang',
       hero: 'assets/img/nasi-liwet-warung.webp', heroAlt: 'Suasana lapak Nasi Liwet Wongso Lemu pada malam hari, beberapa orang berkebaya duduk di belakang etalase lauk',
       source: 'Google Maps (lokasi, rating, jam buka); mojok.co (harga, jam tutup)', porsi: '1 porsi.',
@@ -37,7 +37,7 @@ window.SOLORASA_DATA = {
       desc: 'Serabi santan legendaris sejak 1923, rasa original dan cokelat.',
       address: 'Jl. Moh. Yamin No. 28, Jayengan, Serengan, Surakarta', area: 'Serengan', pos: [-7.5774586, 110.8200852],
       open: '05:00', close: '17:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000 - 50.000',
-      rating: '4,5', ratingCount: '2.209', phone: null,
+      rating: '4,5', ratingCount: '2.211', cid: '4196350152176223309', phone: null,
       img: 'assets/img/serabi.webp', imgAlt: 'Tumpukan serabi Notosuman dengan pinggiran renyah',
       source: 'Google Maps (Ny. Lidia)', porsi: 'Dijual per biji atau per kotak.',
       menu: [
@@ -50,7 +50,7 @@ window.SOLORASA_DATA = {
       desc: 'Timlo kuah bening dengan sosis solo dan hati; kini di Jl. Abdul Muis No. 32A.',
       address: 'Jl. Abdul Muis No. 32A, Kepatihan Kulon, Jebres, Surakarta', area: 'Jebres', pos: [-7.5634393, 110.8288903],
       open: '08:00', close: '15:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000 - 50.000',
-      rating: '4,5', ratingCount: '3.298', phone: null,
+      rating: '4,5', ratingCount: '3.299', cid: '11907394896142976840', phone: null,
       img: 'assets/img/timlo.webp', imgAlt: 'Semangkuk timlo Sastro berkuah bening dengan sosis solo, telur, dan jeroan',
       hero: 'assets/img/timlo-warung.webp', heroAlt: 'Gerobak warung Timlo Sastro dengan tumpukan mangkuk dan dua penjual berkaus putih',
       source: 'Google Maps (Timlo Sastro 1)', porsi: '1 porsi.',
@@ -61,9 +61,9 @@ window.SOLORASA_DATA = {
       desc: 'Warung kambing legendaris sejak 1990, terkenal dengan tengkleng rica-rica dan sate buntel.',
       address: 'Jl. Honggowongso No. 36, Sriwedari, Laweyan, Surakarta', area: 'Laweyan', pos: [-7.5705565, 110.8168618],
       open: '09:00', close: '19:00', priceMin: 40000, priceMax: 65000, priceText: 'Rp 40.000 - 65.000',
-      rating: '4,4', ratingCount: '18.008', phone: null,
+      rating: '4,4', ratingCount: '18.065', cid: '10455910966363145233', phone: null,
       img: 'assets/img/sate.webp', imgAlt: 'Sate buntel kambing disajikan dengan irisan bawang dan kubis',
-      source: 'Wanderlog (alamat & rating Google Maps); kumparan.com (jam buka); Espos/Solopos 12 Mar 2023 (menu & harga, bisa sudah naik)', porsi: 'Per porsi; tengkleng cukup untuk 2–3 orang. Sate bisa dibeli per tusuk.',
+      source: 'Wanderlog (alamat & rating Google Maps); kumparan.com (jam buka); Espos/Solopos 12 Mar 2023 (menu & harga, bisa sudah naik)', porsi: 'Per porsi; tengkleng cukup untuk 2 - 3 orang. Sate bisa dibeli per tusuk.',
       menu: [
         { group: 'Bakaran', name: 'Sate buntel', img: 'assets/img/sate.webp', price: 'Rp 65.000', desc: 'Daging kambing cincang dibakar, kecap & lalapan · 1 porsi (per tusuk Rp 22.000)', status: 'READY', info: 'Daging kambing cincang halus yang dibalut lemak, ditusuk besar, lalu dibakar dengan bumbu khusus. Disajikan dengan kecap manis dan lalapan.' },
         { group: 'Bakaran', name: 'Sate kambing 10 tusuk', price: 'Rp 65.000', desc: 'Daging kambing muda bakar, kecap & lalapan · 10 tusuk (5 tusuk Rp 30.000, 15 tusuk Rp 90.000)', status: 'READY', info: 'Potongan daging kambing muda dibakar dengan racikan bumbu khusus, lalu disajikan dengan kecap manis dan lalapan.' },
@@ -91,7 +91,7 @@ window.SOLORASA_DATA = {
       desc: 'Wedangan legendaris: wedang, kopi, dan aneka gorengan, buka sore sampai malam.',
       address: 'Jl. Jaya Wijaya, Surakarta (Wedangan Pak No 1)', area: 'Jl. Jaya Wijaya', pos: [-7.538866, 110.8459689],
       open: '16:00', close: '24:00', priceMin: 1000, priceMax: 25000, priceText: 'di bawah Rp 25.000',
-      rating: '4,4', ratingCount: '2.907', phone: null,
+      rating: '4,4', ratingCount: '2.908', cid: '11420743958463065838', phone: null,
       img: 'assets/img/wedangan.webp', imgAlt: 'Aneka lauk dan gorengan di gerobak wedangan Solo',
       source: 'Google Maps', porsi: '1 gelas / 1 porsi.',
       menu: [
@@ -104,7 +104,7 @@ window.SOLORASA_DATA = {
       desc: 'Coffee shop di Jl. Veteran, buka pagi sampai lewat tengah malam.',
       address: 'Jl. Veteran No. 136, Gajahan, Pasar Kliwon, Surakarta', area: 'Pasar Kliwon', pos: [-7.582122, 110.8209122],
       open: '07:00', close: '01:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000 - 50.000',
-      rating: '4,6', ratingCount: '2.479', checkedAt: '25 Nov 2026', phone: null,
+      rating: '4,6', ratingCount: '2.479', cid: '14625902248264767002', phone: null,
       img: 'assets/img/kopi-susu.webp', imgAlt: 'Segelas es kopi susu di atas meja kayu', illus: true,
       source: 'Google Maps (alamat, rating); Dealls 25 Mei 2026 (jam, harga, menu)', porsi: '1 gelas / 1 porsi.',
       menu: [
@@ -119,7 +119,7 @@ window.SOLORASA_DATA = {
       desc: 'Coffee shop di Jl. Slamet Riyadi, buka sejak pagi.',
       address: 'Jl. Slamet Riyadi No. 103, Kauman, Pasar Kliwon, Surakarta', area: 'Pasar Kliwon', pos: [-7.5711875, 110.8244693],
       open: '06:00', close: '22:00', priceMin: 15000, priceMax: 30000, priceText: 'Rp 15.000 - 30.000',
-      rating: '4,6', ratingCount: '871', checkedAt: '25 Nov 2026', phone: null,
+      rating: '4,6', ratingCount: '871', cid: '5925342084454493296', phone: null,
       img: 'assets/img/kopi-tubruk.webp', imgAlt: 'Secangkir kopi tubruk dengan gula', illus: true,
       source: 'Google Maps (alamat, rating); Dealls 25 Mei 2026 (jam, harga, menu)', porsi: '1 gelas / 1 porsi.',
       menu: [
@@ -129,17 +129,26 @@ window.SOLORASA_DATA = {
       ]
     }
   ],
-  /* Rute kuliner ½ hari. travel = menit perjalanan dari tempat sebelumnya (motor/mobil), stay = menit di tempat.
+  /* Rute kuliner. travel = menit perjalanan dari tempat sebelumnya (motor/mobil), stay = menit di tempat.
      PERKIRAAN, belum dicek: cek tiap ruas di Google Maps lalu perbarui angkanya. */
   routes: [
-    { id: 'pagi', name: 'Pagi–siang: sarapan khas Solo', start: '08:00', stops: [
+    { id: 'pagi', name: 'Pagi - Siang: sarapan khas Solo', start: '08:00', stops: [
       { id: 'serabi-notosuman', travel: 0, stay: 30 },
       { id: 'timlo-sastro', travel: 15, stay: 45 },
       { id: 'selat-mbak-lies', travel: 15, stay: 60 } ] },
-    { id: 'malam', name: 'Sore–malam: makan malam dan wedangan', start: '16:30', stops: [
+    { id: 'malam', name: 'Sore - Malam: makan malam dan wedangan', start: '16:30', stops: [
       { id: 'sate-pak-manto', travel: 0, stay: 60 },
       { id: 'nasi-liwet-wongso-lemu', travel: 10, stay: 45 },
       { id: 'wedangan-pak-no', travel: 15, stay: 60 } ] }
+  ],
+  /* shortcut: tautan masih ke beranda tiap platform, ganti dengan URL akun SoloRasa/kelompok setelah akunnya dibuat */
+  social: [
+    { id: 'youtube', name: 'YouTube', url: 'https://www.youtube.com/' },
+    { id: 'x', name: 'X', url: 'https://x.com/' },
+    { id: 'tiktok', name: 'TikTok', url: 'https://www.tiktok.com/' },
+    { id: 'instagram', name: 'Instagram', url: 'https://www.instagram.com/' },
+    { id: 'facebook', name: 'Facebook', url: 'https://www.facebook.com/' },
+    { id: 'threads', name: 'Threads', url: 'https://www.threads.net/' }
   ],
   categories: ['Legend', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Coffee Shop', 'Street Food', 'Murah'],
   credits: 'Foto: Wikimedia Commons — Aqilla Rahmi (CC BY 4.0), Gunawan Kartapranata, Meursault2004, Nasudi (CC BY-SA), Fhikri Latifi (CC0), Midori (CC BY 3.0), ESCapade (CC BY-SA 3.0), Sam Hidayat (Pasar Gede, CC BY-SA 4.0). Peta: Google Maps, OpenStreetMap.'

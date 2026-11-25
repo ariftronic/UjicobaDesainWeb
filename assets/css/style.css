@@ -89,10 +89,10 @@ main { animation: sr-in var(--sr-dur) ease-out; }
 .status-READY { background: var(--sr-ok-bg); color: var(--sr-ok); }
 .status-HABIS { background: var(--sr-no-bg); color: var(--sr-no); }
 .status-BELUM { background: var(--sr-muted); color: var(--sr-muted-fg-strong); }
-/* Tempat buka/tutup: gradasi, teks putih; ujung terangnya masih ≥ 4.5:1, jangan dibuat lebih terang */
+/* Tempat buka/tutup: satu warna, teks putih */
 .status-buka, .status-tutup { color: #fff; padding-inline: .85rem; }
-.status-buka { background: linear-gradient(90deg, #0F4D2E, #2A7A50); }
-.status-tutup { background: linear-gradient(90deg, #C4161F, #DA3845); }
+.status-buka { background: #14532D; }
+.status-tutup { background: #C4161F; }
 
 /* Bagian halaman */
 .sr-hero { background: var(--sr-accent); }
@@ -123,6 +123,10 @@ iframe.map-img { display: block; height: auto; aspect-ratio: 4 / 3; max-height: 
 .sr-footer a:hover { color: #fff; }
 .sr-footer .credit { font-size: .8125rem; }
 .sr-footer .credit summary { min-height: 44px; padding-top: .7rem; cursor: pointer; }
+/* Media sosial di footer */
+.sr-footer .sr-social a { width: 44px; height: 44px; justify-content: center; border-radius: 50%; background: rgba(255, 255, 255, .1);
+  transition: background-color var(--sr-dur) ease-out, transform var(--sr-dur) ease-out; }
+.sr-footer .sr-social a:hover { background: var(--sr-primary); color: #fff; transform: translateY(-2px); }
 /* Pita batik di atas footer, tampil juga di HP yang tidak punya sisi kosong */
 .sr-footer::before { content: ""; display: block; height: 56px; opacity: .5; background: url("../img/batik-parang.webp") center / 112px; filter: brightness(0) invert(1); }
 .sr-bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 1030; background: var(--sr-card); border-top: 1px solid var(--sr-border);

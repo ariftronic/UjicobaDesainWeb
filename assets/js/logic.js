@@ -81,16 +81,17 @@
   function mapsQuery(p) { return (p.name + ', ' + p.address.replace(/\s*\(.*?\)\s*/g, ' ')).replace(/\s+/g, ' ').trim(); }
   function dirUrl(p) { return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(mapsQuery(p)); }
   function embedUrl(p) { return 'https://maps.google.com/maps?q=' + encodeURIComponent(mapsQuery(p)) + '&z=16&output=embed'; } // tanpa API key
+  function reviewUrl(p) { return 'https://www.google.com/maps?cid=' + p.cid; }
   function searchUrl(p) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mapsQuery(p)); }
 
   const COLS = ['Nama', 'Kategori', 'Label', 'Alamat', 'Area', 'Jam buka', 'Harga per orang', 'Harga mulai (Rp)', 'Rating Google', 'Telepon', 'Link Google Maps', 'Petunjuk arah', 'Sumber data'];
-  const rowsFor = list => list.map(p => [p.name, p.category, p.label, p.address, p.area, p.open + '–' + p.close, p.priceText, p.priceMin,
+  const rowsFor = list => list.map(p => [p.name, p.category, p.label, p.address, p.area, p.open + ' - ' + p.close, p.priceText, p.priceMin,
     p.rating + ' (' + p.ratingCount + ' ulasan)', p.phone || '', searchUrl(p), dirUrl(p), p.source]);
   const csvCell = v => { const s = String(v ?? ''); return /[",\n;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
   const csv = rows => '﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n') + '\r\n'; // BOM agar Excel membaca UTF-8
   function toCsv(list) { return csv([COLS, ...rowsFor(list)]); }
 
-  /* Rute ½ hari: jam tiba/selesai dari jam mulai + perjalanan + lama di tempat; tandai tempat yang tutup saat dikunjungi. */
+  /* Rute: jam tiba/selesai dari jam mulai + perjalanan + lama di tempat; tandai tempat yang tutup saat dikunjungi. */
   const fmtMin = t => { t = ((t % 1440) + 1440) % 1440; return String(Math.floor(t / 60)).padStart(2, '0') + '.' + String(t % 60).padStart(2, '0'); };
   function planRoute(route, places) {
     let t = toMin(route.start);
@@ -116,11 +117,11 @@
   const ROUTE_COLS = ['Urutan', 'Nama', 'Alamat', 'Perjalanan dari sebelumnya (menit)', 'Tiba', 'Selesai', 'Lama di tempat (menit)', 'Jam buka', 'Link Google Maps'];
   function routeCsv(route, plan) {
     return csv([[route.name], ROUTE_COLS, ...plan.map(s => [s.n, s.p.name, s.p.address, s.travel, fmtMin(s.arrive), fmtMin(s.leave), s.stay,
-      s.p.open + '–' + s.p.close + (s.openOk ? '' : ' (TUTUP saat jam kunjungan)'), searchUrl(s.p)]),
+      s.p.open + ' - ' + s.p.close + (s.openOk ? '' : ' (TUTUP saat jam kunjungan)'), searchUrl(s.p)]),
       [], ['Rute lengkap', routeUrl(plan)], ['Catatan', 'Waktu perjalanan perkiraan; cek di Google Maps.']]);
   }
   function toTsv(list) { return [COLS, ...rowsFor(list)].map(r => r.map(v => String(v ?? '').replace(/[\t\n]/g, ' ')).join('\t')).join('\n'); }
 
-  const api = { toMin, isOpenAt, nowWib, matchesQuery, matchesCategory, validatePrice, applyFilters, recommend, distKm, nearest, fmtKm, activeChips, dirUrl, searchUrl, embedUrl, toCsv, toTsv, COLS, fmtMin, planRoute, routeUrl, routeCsv, customRouteUrl, routeEmbedUrl };
+  const api = { toMin, isOpenAt, nowWib, matchesQuery, matchesCategory, validatePrice, applyFilters, recommend, distKm, nearest, fmtKm, activeChips, dirUrl, reviewUrl, searchUrl, embedUrl, toCsv, toTsv, COLS, fmtMin, planRoute, routeUrl, routeCsv, customRouteUrl, routeEmbedUrl };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.SR = api;
 })(typeof window !== 'undefined' ? window : globalThis);
