@@ -71,7 +71,7 @@
     if (f.q) c.push({ key: 'q', label: '“' + f.q + '”' });
     if (f.category && f.category !== 'Semua') c.push({ key: 'category', label: f.category });
     if (f.area && f.area !== 'Semua') c.push({ key: 'area', label: f.area });
-    if (f.min != null || f.max != null) c.push({ key: 'price', label: (f.min != null ? rp(f.min) : 'Rp 0') + '–' + (f.max != null ? rp(f.max) : '…') });
+    if (f.min != null || f.max != null) c.push({ key: 'price', label: (f.min != null ? rp(f.min) : 'Rp 0') + ' - ' + (f.max != null ? rp(f.max) : '…') });
     if (f.status && f.status !== 'Semua') c.push({ key: 'status', label: 'Menu ' + (f.status === 'BELUM' ? 'belum terkonfirmasi' : f.status) });
     if (f.promo) c.push({ key: 'promo', label: 'Sedang promo' });
     if (f.openNow) c.push({ key: 'openNow', label: 'Buka sekarang' });

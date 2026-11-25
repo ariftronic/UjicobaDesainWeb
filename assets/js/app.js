@@ -96,7 +96,7 @@
       <div class="body">
         <h3><a class="stretched-link text-reset text-decoration-none" href="detail.html?id=${p.id}">${esc(p.name)}</a></h3>
         <div class="small text-muted-sr">${esc(p.dish)} · <span class="rating">${icon('star', 14)} ${p.rating}</span> Google</div>
-        <div class="price h-ic">${icon('wallet', 15)} ${esc(p.priceText)} <span class="small fw-normal text-muted-sr">/ orang</span></div>
+        <div class="small text-muted-sr d-flex align-items-center gap-1">${icon('wallet', 15)} ${esc(p.priceText)} / orang</div>
         <div class="small text-muted-sr d-flex align-items-center gap-1">${icon('pin', 15)} ${esc(p.area)}, Surakarta</div>
         <div class="small text-muted-sr d-flex align-items-center gap-1">${icon('clock', 15)} ${hours(p)} ${openTag(SR.isOpenAt(p.open, p.close, SR.nowWib()))}</div>
         <div class="cta"><span class="btn btn-sr-outline w-100">${icon('utensils', 18)} Lihat menu dan harga</span></div>
