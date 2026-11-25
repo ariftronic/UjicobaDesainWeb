@@ -21,17 +21,21 @@ assert.deepEqual(names(SR.applyFilters(places, { ...base, q: 'tengkleng' }, m('1
 assert.deepEqual(names(SR.applyFilters(places, { ...base, q: 'SERENGAN' }, m('10:00'))), ['Warung Selat Mbak Lies', 'Serabi Notosuman']);
 assert.equal(SR.applyFilters(places, { ...base, q: 'pizza' }, m('10:00')).length, 0);
 
+// lingkaran "Mau makan apa?": nama makanan jelas, bukan nama kategori umum, dan pencariannya menemukan tempatnya
+for (const p of places) { assert.ok(!['Makanan Berat', 'Jajanan', 'Angkringan'].includes(p.dish), p.dish); assert.ok(names(SR.applyFilters(places, { ...base, q: p.dish }, 0)).includes(p.name), p.dish); }
+
 // kategori: label vs jenis; Street Food belum ada datanya
 assert.deepEqual(names(SR.applyFilters(places, { ...base, category: 'Jajanan' }, 0)), ['Serabi Notosuman']);
 assert.equal(SR.applyFilters(places, { ...base, category: 'Legend' }, 0).length, 3);
 // Murah = harga mulai di bawah Rp 20.000, bukan label; pencarian kata "murah" ikut aturan yang sama
-for (const f of [{ category: 'Murah' }, { q: 'murah' }]) assert.deepEqual(names(SR.applyFilters(places, { ...base, ...f }, 0)), ['Nasi Liwet Wongso Lemu', 'Wedangan Pak No']);
+for (const f of [{ category: 'Murah' }, { q: 'murah' }]) assert.deepEqual(names(SR.applyFilters(places, { ...base, ...f }, 0)), ['Nasi Liwet Wongso Lemu', 'Wedangan Pak No', 'UD Djaya Coffee']);
 assert.ok(places.every(p => p.label !== 'Murah' || SR.matchesCategory(p, 'Murah')), 'label Murah harus sesuai harga');
 assert.equal(SR.applyFilters(places, { ...base, category: 'Street Food' }, 0).length, 0);
 
 // harga (tumpang tindih rentang) dan validasi
 assert.ok(!names(SR.applyFilters(places, { ...base, min: 60000 }, 0)).includes('Warung Selat Mbak Lies'));
-assert.deepEqual(names(SR.applyFilters(places, { ...base, max: 20000 }, 0)), ['Nasi Liwet Wongso Lemu', 'Wedangan Pak No']);
+assert.deepEqual(names(SR.applyFilters(places, { ...base, max: 20000 }, 0)), ['Nasi Liwet Wongso Lemu', 'Wedangan Pak No', 'UD Djaya Coffee']);
+assert.deepEqual(names(SR.applyFilters(places, { ...base, category: 'Coffee Shop' }, 0)), ["Cold 'n Brew Veteran", 'UD Djaya Coffee']);
 assert.equal(SR.validatePrice(50000, 10000), 'Harga maksimum tidak boleh lebih kecil dari minimum.');
 assert.equal(SR.validatePrice(0, 10000), '');
 
@@ -42,10 +46,10 @@ assert.equal(ready.length, 5);
 
 // promo belum ada datanya -> hasil kosong; buka sekarang memakai jam WIB
 assert.equal(SR.applyFilters(places, { ...base, promo: true }, 0).length, 0);
-assert.deepEqual(names(SR.applyFilters(places, { ...base, openNow: true }, m('00:30'))), ['Nasi Liwet Wongso Lemu']);
+assert.deepEqual(names(SR.applyFilters(places, { ...base, openNow: true }, m('00:30'))), ['Nasi Liwet Wongso Lemu', "Cold 'n Brew Veteran"]);
 
 // rekomendasi: buka dulu, lalu termurah (status menu contoh tidak ikut menentukan)
-assert.deepEqual(names(SR.recommend(places, m('17:00'))).slice(0, 4), ['Wedangan Pak No', 'Nasi Liwet Wongso Lemu', 'Warung Selat Mbak Lies', 'Sate Kambing & Tengkleng Pak Manto']);
+assert.deepEqual(names(SR.recommend(places, m('17:00'))).slice(0, 4), ['Wedangan Pak No', 'UD Djaya Coffee', 'Nasi Liwet Wongso Lemu', "Cold 'n Brew Veteran"]);
 
 // chip filter aktif
 assert.deepEqual(SR.activeChips({ ...base, category: 'Jajanan', max: 50000, status: 'READY' }).map(c => c.key), ['category', 'price', 'status']);
@@ -53,9 +57,10 @@ assert.deepEqual(SR.activeChips({ ...base, category: 'Jajanan', max: 50000, stat
 // tautan Google Maps tanpa catatan dalam kurung
 assert.ok(!decodeURIComponent(SR.dirUrl(places.find(p => p.id === 'wedangan-pak-no'))).includes('('));
 
-// CSV: BOM, 13 kolom, 6 baris data, sel berisi koma diberi tanda kutip
+// CSV: BOM, 13 kolom, 8 baris data, sel berisi koma diberi tanda kutip
 const csv = SR.toCsv(places).replace(/^﻿/, '').trim().split('\r\n');
-assert.equal(csv.length, 7);
+assert.equal(csv.length, 9);
+assert.ok(!/null|undefined/.test(SR.toCsv(places)));
 assert.equal(csv[0].split(',').length, 13);
 assert.ok(csv[1].includes('"Jl. Yudhistira No. 9, Serengan, Surakarta"'));
 

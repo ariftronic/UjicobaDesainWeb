@@ -1,5 +1,6 @@
 /* Data katalog SoloRasa.
-   Alamat, jam, harga per orang, dan rating dicek di Google Maps dan artikel kuliner pada 22 Nov 2026.
+   Alamat, jam, harga per orang, dan rating dicek di Google Maps dan artikel kuliner pada 22 Nov 2026
+   (coffee shop: alamat & rating Google Maps 25 Nov 2026; jam, harga, menu dari artikel Dealls). illus: true = foto ilustrasi, bukan dari tempatnya.
    Status menu (READY / HABIS / BELUM) adalah CONTOH: di produksi diisi penjual (mis. Firestore atau Google Sheets). */
 window.SOLORASA_DATA = {
   checkedAt: '22 Nov 2026',
@@ -14,7 +15,7 @@ window.SOLORASA_DATA = {
       hero: 'assets/img/selat-warung.webp', heroAlt: 'Bagian dalam Warung Selat Mbak Lies dengan hiasan gantung',
       source: 'Google Maps; detik.com', porsi: 'Semua menu 1 porsi.',
       menu: [
-        { name: 'Selat Solo (bistik jawa)', price: '± Rp 25.000', desc: 'Daging sapi, telur, sayur, kuah manis · 1 porsi', status: 'READY', info: 'Perpaduan bistik Belanda dan selera Jawa. Daging sapi disiram kuah encer manis-asam dari kecap, cuka, dan pala, disajikan dengan sayuran rebus, kentang, dan saus mustard.' },
+        { name: 'Selat Solo (bistik jawa)', img: 'assets/img/selat.webp', price: '± Rp 25.000', desc: 'Daging sapi, telur, sayur, kuah manis · 1 porsi', status: 'READY', info: 'Perpaduan bistik Belanda dan selera Jawa. Daging sapi disiram kuah encer manis-asam dari kecap, cuka, dan pala, disajikan dengan sayuran rebus, kentang, dan saus mustard.' },
         { name: 'Selat galantine', price: null, desc: 'Galantine daging dengan kuah selat · 1 porsi', status: 'HABIS', info: 'Galantine adalah daging cincang yang dibentuk gulungan lalu dikukus dan diiris. Disajikan seperti selat: kuah manis, sayuran, dan telur.' },
         { name: 'Sup matahari', price: null, desc: 'Sup ayam dan sayur dalam telur dadar · 1 porsi', status: 'READY', info: 'Dinamai dari bentuknya: telur dadar tipis membungkus isian ayam dan sayur, dikukus dalam mangkuk lalu dibalik sehingga mirip matahari, kemudian disiram kaldu bening.' },
         { name: 'Gado-gado', price: null, desc: 'Sayur rebus dengan saus kacang · 1 porsi', status: 'BELUM', info: 'Sayuran rebus, tahu, tempe, dan telur yang disiram saus kacang, biasanya dengan kerupuk. Mengandung kacang tanah.' }
@@ -29,10 +30,10 @@ window.SOLORASA_DATA = {
       img: 'assets/img/nasi-liwet.webp', imgAlt: 'Nasi liwet dengan suwiran ayam dan areh di atas daun pisang',
       hero: 'assets/img/nasi-liwet-warung.webp', heroAlt: 'Suasana lapak Nasi Liwet Wongso Lemu pada malam hari, beberapa orang berkebaya duduk di belakang etalase lauk',
       source: 'Google Maps (lokasi, rating, jam buka); mojok.co (harga, jam tutup)', porsi: '1 porsi.',
-      menu: [ { name: 'Nasi liwet suwir ayam', price: null, desc: 'Nasi gurih, suwir ayam, labu siam, telur, areh · 1 porsi', status: 'READY', info: 'Nasi liwet khas Solo dimasak dengan santan, daun salam, dan serai sehingga gurih. Disajikan di atas daun pisang dengan sayur labu siam, suwiran ayam, telur, dan areh (santan kental yang dimasak).' } ]
+      menu: [ { name: 'Nasi liwet suwir ayam', img: 'assets/img/nasi-liwet.webp', price: null, desc: 'Nasi gurih, suwir ayam, labu siam, telur, areh · 1 porsi', status: 'READY', info: 'Nasi liwet khas Solo dimasak dengan santan, daun salam, dan serai sehingga gurih. Disajikan di atas daun pisang dengan sayur labu siam, suwiran ayam, telur, dan areh (santan kental yang dimasak).' } ]
     },
     {
-      id: 'serabi-notosuman', name: 'Serabi Notosuman', category: 'Jajanan', label: 'Legend', dish: 'Jajanan',
+      id: 'serabi-notosuman', name: 'Serabi Notosuman', category: 'Jajanan', label: 'Legend', dish: 'Serabi',
       desc: 'Serabi santan legendaris sejak 1923, rasa original dan cokelat.',
       address: 'Jl. Moh. Yamin No. 28, Jayengan, Serengan, Surakarta', area: 'Serengan',
       open: '05:00', close: '17:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
@@ -40,19 +41,20 @@ window.SOLORASA_DATA = {
       img: 'assets/img/serabi.webp', imgAlt: 'Tumpukan serabi Notosuman dengan pinggiran renyah',
       source: 'Google Maps (Ny. Lidia)', porsi: 'Dijual per biji atau per kotak.',
       menu: [
-        { name: 'Serabi original', price: null, desc: 'Serabi santan, dijual per biji atau per kotak', status: 'READY', info: 'Serabi Solo dibuat dari tepung beras dan santan, dimasak di wajan tanah liat kecil. Bagian tengahnya lembut, pinggirannya tipis dan renyah, lalu digulung daun pisang.' },
+        { name: 'Serabi original', img: 'assets/img/serabi.webp', price: null, desc: 'Serabi santan, dijual per biji atau per kotak', status: 'READY', info: 'Serabi Solo dibuat dari tepung beras dan santan, dimasak di wajan tanah liat kecil. Bagian tengahnya lembut, pinggirannya tipis dan renyah, lalu digulung daun pisang.' },
         { name: 'Serabi cokelat', price: null, desc: 'Serabi santan dengan taburan cokelat', status: 'HABIS', info: 'Serabi santan yang sama dengan taburan cokelat di atasnya, rasanya lebih manis.' }
       ]
     },
     {
-      id: 'timlo-sastro', name: 'Timlo Sastro', category: 'Makanan Berat', label: 'Legend', dish: 'Makanan Berat',
+      id: 'timlo-sastro', name: 'Timlo Sastro', category: 'Makanan Berat', label: 'Legend', dish: 'Timlo',
       desc: 'Timlo kuah bening dengan sosis solo dan hati; kini di Jl. Abdul Muis No. 32A.',
       address: 'Jl. Abdul Muis No. 32A, Kepatihan Kulon, Jebres, Surakarta', area: 'Jebres',
       open: '08:00', close: '15:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
       rating: '4,5', ratingCount: '3.298', phone: null,
-      img: 'assets/img/timlo.webp', imgAlt: 'Gerobak warung Timlo Sastro dengan tumpukan mangkuk dan dua penjual berkaus putih',
+      img: 'assets/img/timlo.webp', imgAlt: 'Semangkuk timlo Sastro berkuah bening dengan sosis solo, telur, dan jeroan',
+      hero: 'assets/img/timlo-warung.webp', heroAlt: 'Gerobak warung Timlo Sastro dengan tumpukan mangkuk dan dua penjual berkaus putih',
       source: 'Google Maps (Timlo Sastro 1)', porsi: '1 porsi.',
-      menu: [ { name: 'Timlo komplit', price: null, desc: 'Kuah bening, sosis solo, telur pindang, hati ampela · 1 porsi', status: 'BELUM', info: 'Sup kuah bening dari kaldu ayam dengan bumbu ringan. Isinya sosis solo (dadar gulung berisi daging), telur pindang, serta hati dan ampela; biasanya dimakan dengan nasi.' } ]
+      menu: [ { name: 'Timlo komplit', img: 'assets/img/timlo.webp', price: null, desc: 'Kuah bening, sosis solo, telur pindang, hati ampela · 1 porsi', status: 'BELUM', info: 'Sup kuah bening dari kaldu ayam dengan bumbu ringan. Isinya sosis solo (dadar gulung berisi daging), telur pindang, serta hati dan ampela; biasanya dimakan dengan nasi.' } ]
     },
     {
       id: 'sate-pak-manto', name: 'Sate Kambing & Tengkleng Pak Manto', category: 'Makanan Berat', label: 'Favorit', dish: 'Sate & tengkleng',
@@ -63,7 +65,7 @@ window.SOLORASA_DATA = {
       img: 'assets/img/sate.webp', imgAlt: 'Sate buntel kambing disajikan dengan irisan bawang dan kubis',
       source: 'Wanderlog (alamat & rating Google Maps); kumparan.com (jam buka); Espos/Solopos 12 Mar 2023 (menu & harga, bisa sudah naik)', porsi: 'Per porsi; tengkleng cukup untuk 2–3 orang. Sate bisa dibeli per tusuk.',
       menu: [
-        { group: 'Bakaran', name: 'Sate buntel', price: 'Rp 65.000', desc: 'Daging kambing cincang dibakar, kecap & lalapan · 1 porsi (per tusuk Rp 22.000)', status: 'READY', info: 'Daging kambing cincang halus yang dibalut lemak, ditusuk besar, lalu dibakar dengan bumbu khusus. Disajikan dengan kecap manis dan lalapan.' },
+        { group: 'Bakaran', name: 'Sate buntel', img: 'assets/img/sate.webp', price: 'Rp 65.000', desc: 'Daging kambing cincang dibakar, kecap & lalapan · 1 porsi (per tusuk Rp 22.000)', status: 'READY', info: 'Daging kambing cincang halus yang dibalut lemak, ditusuk besar, lalu dibakar dengan bumbu khusus. Disajikan dengan kecap manis dan lalapan.' },
         { group: 'Bakaran', name: 'Sate kambing 10 tusuk', price: 'Rp 65.000', desc: 'Daging kambing muda bakar, kecap & lalapan · 10 tusuk (5 tusuk Rp 30.000, 15 tusuk Rp 90.000)', status: 'READY', info: 'Potongan daging kambing muda dibakar dengan racikan bumbu khusus, lalu disajikan dengan kecap manis dan lalapan.' },
         { group: 'Bakaran', name: 'Sate campur buntel', price: 'Rp 65.000', desc: '2 tusuk buntel + 3 tusuk daging · 1 porsi', status: 'READY', info: 'Pilihan untuk yang ingin mencoba keduanya: dua tusuk sate buntel dan tiga tusuk sate daging dalam satu piring.' },
         { group: 'Masakan kambing', name: 'Tengkleng rica', price: 'Rp 65.000', desc: 'Tulang kambing muda berbumbu rica pedas manis · 1 porsi', status: 'READY', info: 'Menu andalan Pak Manto: tulang dan iga kambing muda yang masih berdaging dimasak dengan bumbu rica-rica pedas manis. Porsinya besar, cocok dimakan beramai-ramai.' },
@@ -85,7 +87,7 @@ window.SOLORASA_DATA = {
       ]
     },
     {
-      id: 'wedangan-pak-no', name: 'Wedangan Pak No', category: 'Angkringan', label: 'Murah', dish: 'Angkringan',
+      id: 'wedangan-pak-no', name: 'Wedangan Pak No', category: 'Angkringan', label: 'Murah', dish: 'Wedangan',
       desc: 'Wedangan legendaris: wedang, kopi, dan aneka gorengan, buka sore sampai malam.',
       address: 'Jl. Jaya Wijaya, Surakarta (Wedangan Pak No 1)', area: 'Jl. Jaya Wijaya',
       open: '16:00', close: '24:00', priceMin: 1000, priceMax: 25000, priceText: 'di bawah Rp 25.000',
@@ -94,7 +96,36 @@ window.SOLORASA_DATA = {
       source: 'Google Maps', porsi: '1 gelas / 1 porsi.',
       menu: [
         { name: 'Aneka wedang', price: null, desc: 'Wedang jahe, teh, kopi, dan minuman hangat lain · 1 gelas', status: 'READY', info: 'Wedangan adalah tempat minum santai khas Solo. Pilihannya antara lain wedang jahe, kopi, dan teh nasgitel (panas, legi, kentel: panas, manis, kental).' },
-        { name: 'Aneka gorengan', price: null, desc: 'Tempe, bakwan, dan gorengan lain · per biji', status: 'BELUM', info: 'Gorengan seperti tempe, bakwan, dan tahu yang diambil sendiri, biasanya bisa dibakar ulang di atas arang agar hangat.' }
+        { name: 'Aneka gorengan', img: 'assets/img/wedangan.webp', price: null, desc: 'Tempe, bakwan, dan gorengan lain · per biji', status: 'BELUM', info: 'Gorengan seperti tempe, bakwan, dan tahu yang diambil sendiri, biasanya bisa dibakar ulang di atas arang agar hangat.' }
+      ]
+    },
+    {
+      id: 'cold-n-brew-veteran', name: "Cold 'n Brew Veteran", category: 'Coffee Shop', label: 'Kopi', dish: 'Coffee shop',
+      desc: 'Coffee shop di Jl. Veteran, buka pagi sampai lewat tengah malam.',
+      address: 'Jl. Veteran No. 136, Gajahan, Pasar Kliwon, Surakarta', area: 'Pasar Kliwon',
+      open: '07:00', close: '01:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
+      rating: '4,6', ratingCount: '2.479', checkedAt: '25 Nov 2026', phone: null,
+      img: 'assets/img/kopi-susu.webp', imgAlt: 'Segelas es kopi susu di atas meja kayu', illus: true,
+      source: 'Google Maps (alamat, rating); Dealls 25 Mei 2026 (jam, harga, menu)', porsi: '1 gelas / 1 porsi.',
+      menu: [
+        { name: 'Dilema Iced', price: null, desc: 'Minuman dingin; tanyakan isinya ke penjual · 1 gelas', status: 'BELUM' },
+        { name: 'Caffè latte', price: null, desc: 'Espresso dengan susu · 1 gelas', status: 'BELUM' },
+        { name: 'Matcha', price: null, desc: 'Minuman teh hijau bubuk · 1 gelas', status: 'BELUM' },
+        { name: 'Oreo slice cake', price: null, desc: 'Kue potong · 1 porsi', status: 'BELUM' }
+      ]
+    },
+    {
+      id: 'ud-djaya-coffee', name: 'UD Djaya Coffee', category: 'Coffee Shop', label: 'Murah', dish: 'Coffee shop',
+      desc: 'Coffee shop di Jl. Slamet Riyadi, buka sejak pagi.',
+      address: 'Jl. Slamet Riyadi No. 103, Kauman, Pasar Kliwon, Surakarta', area: 'Pasar Kliwon',
+      open: '06:00', close: '22:00', priceMin: 15000, priceMax: 30000, priceText: 'Rp 15.000–30.000',
+      rating: '4,6', ratingCount: '871', checkedAt: '25 Nov 2026', phone: null,
+      img: 'assets/img/kopi-tubruk.webp', imgAlt: 'Secangkir kopi tubruk dengan gula', illus: true,
+      source: 'Google Maps (alamat, rating); Dealls 25 Mei 2026 (jam, harga, menu)', porsi: '1 gelas / 1 porsi.',
+      menu: [
+        { name: 'Kopi Susu Djaya', price: null, desc: 'Kopi susu · 1 gelas', status: 'BELUM' },
+        { name: 'Es kopi tubruk', price: null, desc: 'Kopi tubruk dingin · 1 gelas', status: 'BELUM' },
+        { name: 'Kaya toast', price: null, desc: 'Roti panggang dengan selai kaya · 1 porsi', status: 'BELUM' }
       ]
     }
   ],
@@ -110,6 +141,6 @@ window.SOLORASA_DATA = {
       { id: 'nasi-liwet-wongso-lemu', travel: 10, stay: 45 },
       { id: 'wedangan-pak-no', travel: 15, stay: 60 } ] }
   ],
-  categories: ['Legend', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Street Food', 'Murah'],
-  credits: 'Foto: Wikimedia Commons — Aqilla Rahmi (CC BY 4.0), Gunawan Kartapranata, Meursault2004, Nasudi (CC BY-SA), Midori (CC BY 3.0), ESCapade (CC BY-SA 3.0), Sam Hidayat (Pasar Gede, CC BY-SA 4.0). Peta: Google Maps.'
+  categories: ['Legend', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Coffee Shop', 'Street Food', 'Murah'],
+  credits: 'Foto: Wikimedia Commons — Aqilla Rahmi (CC BY 4.0), Gunawan Kartapranata, Meursault2004, Nasudi (CC BY-SA), Fhikri Latifi (CC0), Midori (CC BY 3.0), ESCapade (CC BY-SA 3.0), Sam Hidayat (Pasar Gede, CC BY-SA 4.0). Peta: Google Maps.'
 };

@@ -73,11 +73,14 @@
             <nav class="col-6 col-md-3" aria-label="Navigasi footer"><h2 class="h6 text-white">Navigasi</h2>
               <ul class="list-unstyled mb-0"><li><a href="jelajah.html">Jelajah kuliner</a></li><li><a href="peta.html">Peta</a></li><li><a ${filterLink}>Filter</a></li></ul></nav>
             <div class="col-6 col-md-3"><h2 class="h6 text-white">Bantuan</h2>
-              <p class="small mb-0">Konfirmasi menu dan harga langsung ke penjual sebelum memesan.</p></div>
+              <p class="small mb-0">Data masih contoh. Konfirmasi menu dan harga langsung ke penjual sebelum memesan.</p></div>
           </div>
           <hr class="border-light opacity-25">
-          <p class="credit mb-1">${esc(D ? D.credits : '')}</p>
-          <p class="credit mb-0">Copyright © 2026 SoloRasa · Kelompok 1, Fakultas Keguruan dan Ilmu Pendidikan, Pendidikan Teknik Informatika dan Komputer, Universitas Sebelas Maret.</p>
+          <div class="d-md-flex justify-content-between gap-4">
+            <p class="small mb-2">© 2026 <b>SoloRasa</b></p>
+            <p class="small mb-2">Karya <b>Kelompok 1</b> · Pendidikan Teknik Informatika dan Komputer<br class="d-none d-lg-inline"> FKIP, Universitas Sebelas Maret</p>
+          </div>
+          <details class="credit"><summary>Kredit foto dan peta</summary><p class="mb-0">${esc(D ? D.credits : '')}</p></details>
         </div>
       </footer>
       <nav class="sr-bottom-nav d-flex d-md-none" aria-label="Navigasi bawah">
@@ -86,10 +89,10 @@
   }
 
   /* ---------- komponen ---------- */
-  const openTag = open => `<span class="status ${open ? 'status-READY' : 'status-BELUM'}">${open ? 'BUKA' : 'TUTUP'}</span>`;
+  const openTag = open => `<span class="status ${open ? 'status-buka' : 'status-tutup'}">${open ? 'Buka' : 'Tutup'}</span>`;
   function card(p) {
     return `<div class="col"><article class="sr-card position-relative">
-      <div class="position-relative"><img class="photo" src="${p.img}" alt="${esc(p.imgAlt)}" loading="lazy" width="640" height="400"><span class="tag">${esc(p.label)}</span></div>
+      <div class="position-relative"><img class="photo" src="${p.img}" alt="${esc(p.imgAlt)}" loading="lazy" width="640" height="400"><span class="tag">${esc(p.label)}</span>${p.illus ? '<span class="illus">Foto ilustrasi</span>' : ''}</div>
       <div class="body">
         <h3><a class="stretched-link text-reset text-decoration-none" href="detail.html?id=${p.id}">${esc(p.name)}</a></h3>
         <div class="small text-muted-sr">${esc(p.dish)} · <span class="rating">${icon('star', 14)} ${p.rating}</span> Google</div>
@@ -108,12 +111,13 @@
 
   /* ---------- halaman ---------- */
   function home(main) {
-    // foto kategori diambil dari tempat yang cocok, utamakan foto yang belum dipakai; kategori tanpa data tidak ditampilkan
+    const now = SR.nowWib(), openNow = D.places.filter(p => SR.isOpenAt(p.open, p.close, now));
+    // kartu cepat; yang tanpa tempat tidak ditampilkan. Foto diutamakan yang belum dipakai kartu lain
     const used = new Set();
-    const tiles = ['Legend', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Street Food', 'Murah'].map(t => {
-      const ps = D.places.filter(p => SR.matchesCategory(p, t)); if (!ps.length) return null;
-      const p = ps.find(x => !used.has(x.img)) || ps[0]; used.add(p.img); return [t, p.img];
-    }).filter(Boolean);
+    const picks = [['kategori=Legend', 'Kuliner Legend', 'Rasa legendaris khas Solo', D.places.filter(p => SR.matchesCategory(p, 'Legend'))],
+      ['kategori=Murah', 'Murah Meriah', 'Mulai di bawah Rp 20.000', D.places.filter(p => SR.matchesCategory(p, 'Murah'))],
+      ['buka=1', 'Buka Sekarang', openNow.length + ' tempat sedang buka', openNow]]
+      .filter(([, , , ps]) => ps.length).map(([href, t, d, ps]) => { const p = ps.find(x => !used.has(x.img)) || ps[0]; used.add(p.img); return [href, t, d, p.img]; });
     main.innerHTML = `
       <section class="sr-hero">
         <img class="hero-bg" src="assets/img/hero-pasar-gede.webp" alt="" width="1280" height="720" fetchpriority="high">
@@ -131,8 +135,10 @@
           </form>
         </div>
         </div></div></div></section>
-      <section class="container-xl py-5" aria-labelledby="h-kat"><h2 id="h-kat" class="mb-3">Mau makan apa?</h2>
-        <div class="sr-scroll"><div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3">${tiles.map(([t, img]) => `<div class="col"><a class="tile" href="jelajah.html?kategori=${encodeURIComponent(t)}"><span>${t}</span><img src="${img}" alt="" loading="lazy" width="640" height="480"></a></div>`).join('')}</div></div></section>
+      <section class="container-xl py-5" aria-labelledby="h-kat"><h2 id="h-kat" class="mb-1">Mau makan apa?</h2>
+        <p class="text-muted-sr mb-3">Pilih makanan khas Solo yang kamu cari.</p>
+        <ul class="cats list-unstyled">${D.places.filter((p, i) => D.places.findIndex(x => x.dish === p.dish) === i).map(p => `<li><a href="jelajah.html?q=${encodeURIComponent(p.dish)}"><img src="${p.img}" alt="" loading="lazy" width="128" height="128"><span>${esc(p.dish)}</span></a></li>`).join('')}</ul>
+        <ul class="picks list-unstyled" aria-label="Pilihan cepat">${picks.map(([href, t, d, img]) => `<li><a href="jelajah.html?${href}"><img src="${img}" alt="" loading="lazy" width="104" height="104"><b>${t}</b><span class="small text-muted-sr">${d}</span></a></li>`).join('')}</ul></section>
       <section class="py-5" style="background:var(--sr-accent)" aria-labelledby="h-pil"><div class="container-xl">
         <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
           <div><h2 id="h-pil" class="mb-1">Pilihan Kuliner Solo</h2><p class="text-muted-sr mb-0">Legend, murah, dan favorit wisatawan.</p></div>
@@ -148,8 +154,7 @@
              ['wallet', 'Harga & stok', 'Kisaran harga per orang dan status menu: READY, HABIS, atau belum terkonfirmasi.'],
              ['map', 'Lokasi & rute', 'Alamat, jam buka, petunjuk arah, dan rute kuliner setengah hari.']]
             .map(([ic, t, d]) => `<li class="col"><div class="panel h-100"><span class="about-ic">${icon(ic, 22)}</span><h3 class="h6 fw-bold mt-3 mb-1" style="font-family:var(--sr-body)">${t}</h3><p class="small text-muted-sr mb-0">${d}</p></div></li>`).join('')}
-        </ul></div></div>
-        <p class="small-note mt-3 mb-0">Dibuat oleh Kelompok 1, Pendidikan Teknik Informatika dan Komputer, FKIP Universitas Sebelas Maret. Data masih contoh; konfirmasi harga dan ketersediaan ke penjual.</p></section>
+        </ul></div></div></section>
       <section class="container-xl py-5" aria-labelledby="h-peta"><h2 id="h-peta" class="mb-1">Temukan lokasi tempat makan</h2>
         <p class="text-muted-sr">Lihat rekomendasi tempat dan petunjuk arah dari lokasimu.</p>
         <iframe class="map-img mb-3" src="https://maps.google.com/maps?q=Surakarta&z=14&output=embed" title="Peta Kota Solo" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="aspect-ratio:16/9"></iframe>
@@ -243,7 +248,7 @@
     if (location.hash === '#filter') bootstrap.Offcanvas.getOrCreateInstance(oc).show();
   }
 
-  const menuList = menu => `<ul class="list-unstyled d-grid gap-2 mt-3">${menu.map(m => `<li class="panel py-3"><div class="menu-row"><b>${esc(m.name)}</b><span class="price">${esc(m.price || 'Tanya penjual')}</span></div><div class="small text-muted-sr"><span class="status status-${m.status} me-1">${STATUS[m.status]}</span> ${esc(m.desc)}</div>
+  const menuList = menu => `<ul class="list-unstyled d-grid gap-2 mt-3">${menu.map(m => `<li class="panel py-3${m.img ? ' has-img' : ''}">${m.img ? `<img class="menu-img" src="${m.img}" alt="" loading="lazy" width="88" height="88">` : ''}<div class="menu-row"><b>${esc(m.name)}</b><span class="price">${esc(m.price || 'Tanya penjual')}</span></div><div class="small text-muted-sr"><span class="status status-${m.status} me-1">${STATUS[m.status]}</span> ${esc(m.desc)}</div>
       ${m.info ? `<details class="menu-info"><summary>Penjelasan menu</summary><p>${esc(m.info)}</p></details>` : ''}</li>`).join('')}</ul>`;
   function detail(main) {
     const p = D.places.find(x => x.id === params.get('id'));
@@ -257,10 +262,11 @@
           <div class="col-lg-8">
             <h1 class="mb-2">${esc(p.name)}</h1>
             <p class="mb-1 text-muted-sr">${esc(p.dish)} · ${esc(p.label)} · <span class="rating">${icon('star', 14)} ${p.rating}</span> (${p.ratingCount} ulasan Google)</p>
-            <p class="small text-muted-sr">Buka ${hours(p)} · <b class="${open ? 'text-success' : ''}">${open ? 'Sedang buka' : 'Sedang tutup'}</b></p>
+            <p class="small text-muted-sr">Jam buka ${hours(p)} ${openTag(open)}</p>
             <div class="d-flex flex-wrap gap-2 d-lg-none"><a class="btn btn-sr flex-fill" href="${SR.dirUrl(p)}" target="_blank" rel="noopener">${icon('nav', 18)} Petunjuk arah</a>
               ${p.phone ? `<a class="btn btn-sr-outline flex-fill" href="tel:${p.phone.replace(/\D/g, '')}">${icon('phone', 18)} Telepon</a>` : ''}</div>
-            <img class="w-100 rounded-4 my-3" style="aspect-ratio:16/9;object-fit:cover;object-position:center 25%;height:auto" src="${p.hero || p.img}" alt="${esc(p.heroAlt || p.imgAlt)}" width="1280" height="720">
+            <img class="w-100 rounded-4 my-3" style="aspect-ratio:16/9;object-fit:cover;object-position:center 25%;height:auto;max-height:45vh" src="${p.hero || p.img}" alt="${esc(p.heroAlt || p.imgAlt)}" width="1280" height="720">
+            ${p.illus ? '<p class="small-note">Foto ilustrasi, bukan foto dari tempat ini.</p>' : ''}
             <h2 class="mt-4">Menu dan harga</h2>
             <p class="text-muted-sr mb-1">${esc(p.desc)}</p>
             <p class="small-note mb-0">Status READY/HABIS hanya contoh (9 Nov 2026), bukan stok sebenarnya. Porsi saji (contoh): ${esc(p.porsi)}</p>
@@ -270,15 +276,15 @@
             ${D.places.some(x => x !== p && x.category === p.category) ? `<a class="btn btn-sr-outline w-100 my-3" href="jelajah.html?kategori=${encodeURIComponent(p.category)}">${icon('search', 18)} Cari kuliner serupa</a>` : ''}
             <section class="panel mb-3"><h2 class="h4 h-ic">${icon('tag', 22)} Promo</h2><p class="mb-0 text-muted-sr">Belum ada promo terkonfirmasi. Hubungi penjual untuk info promo terbaru.</p></section>
             <section class="panel mb-3"><h2 class="h4 h-ic">${icon('alert', 22)} Informasi alergen</h2><p class="mb-0 text-muted-sr">Informasi alergen belum terkonfirmasi. Data kosong bukan berarti bebas alergen; tanyakan ke penjual sebelum memesan.</p></section>
-            <section class="panel" style="border-left:4px solid var(--sr-primary)"><h2 class="h4 h-ic">${icon('star', 22)} Poin, aturan, dan ulasan</h2><p class="mb-1">Rating ${p.rating} dari ${p.ratingCount} ulasan Google Maps (dicek ${esc(D.checkedAt)}).</p><p class="small-note mb-0">Ulasan hanya ditampilkan bila sumbernya jelas.</p></section>
+            <section class="panel" style="border-left:4px solid var(--sr-primary)"><h2 class="h4 h-ic">${icon('star', 22)} Poin, aturan, dan ulasan</h2><p class="mb-1">Rating ${p.rating} dari ${p.ratingCount} ulasan Google Maps (dicek ${esc(p.checkedAt || D.checkedAt)}).</p><p class="small-note mb-0">Ulasan hanya ditampilkan bila sumbernya jelas.</p></section>
           </div>
           <aside class="col-lg-4"><div class="panel position-sticky" style="top:88px">
             <h2 class="h4 h-ic">${icon('info', 22)} Informasi tempat</h2>
             <dl class="mb-3"><dt class="h-ic">${icon('pin', 16)} Alamat</dt><dd class="text-muted-sr">${esc(p.address)}</dd><dt class="h-ic">${icon('clock', 16)} Jam buka</dt><dd class="text-muted-sr">Setiap hari, ${hours(p)}</dd>
-              ${p.phone ? `<dt class="h-ic">${icon('phone', 16)} Telepon</dt><dd class="text-muted-sr"><a href="tel:${p.phone.replace(/\D/g, '')}">${esc(p.phone)}</a> <span class="small">(dari Google Maps, bukan WhatsApp)</span></dd>` : ''}</dl>
-            <iframe class="map-img mb-3" src="${SR.embedUrl(p)}" title="Peta lokasi ${esc(p.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              ${p.phone ? `<dt class="h-ic">${icon('phone', 16)} Telepon</dt><dd class="text-muted-sr"><a href="tel:${p.phone.replace(/\D/g, '')}">${esc(p.phone)}</a> <span class="small">(dari Google Maps)</span></dd>` : ''}</dl>
             <div class="d-grid gap-2"><a class="btn btn-sr" href="${SR.dirUrl(p)}" target="_blank" rel="noopener">${icon('nav', 18)} Petunjuk arah</a>
               <a class="btn btn-sr-outline" href="${SR.searchUrl(p)}" target="_blank" rel="noopener">${icon('pin', 18)} Lihat di Google Maps</a></div>
+            <iframe class="map-img mt-3" src="${SR.embedUrl(p)}" title="Peta lokasi ${esc(p.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <p class="small-note mt-2 mb-0">Peta dan rute dari Google Maps.</p></div></aside>
         </div></div>`;
   }
@@ -373,7 +379,7 @@
   const io = new IntersectionObserver(es => es.filter(e => e.isIntersecting).forEach((e, i) => {
     e.target.style.animationDelay = i * 60 + 'ms'; e.target.classList.add('in'); io.unobserve(e.target);
   }), { rootMargin: '0px 0px -40px 0px' });
-  const watch = () => main.querySelectorAll('.sr-card:not(.reveal), .tile:not(.reveal), #p-list > li:not(.reveal)').forEach(el => { el.classList.add('reveal'); io.observe(el); });
+  const watch = () => main.querySelectorAll('.sr-card:not(.reveal), .cats a:not(.reveal), .picks a:not(.reveal), #p-list > li:not(.reveal)').forEach(el => { el.classList.add('reveal'); io.observe(el); });
   new MutationObserver(watch).observe(main, { childList: true, subtree: true });
   ({ home, jelajah, detail, peta })[page](main);
 })();
