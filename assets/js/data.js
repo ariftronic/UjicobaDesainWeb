@@ -8,7 +8,7 @@ window.SOLORASA_DATA = {
     {
       id: 'selat-mbak-lies', name: 'Warung Selat Mbak Lies', category: 'Makanan Berat', label: 'Legend', dish: 'Selat Solo',
       desc: 'Selat Solo legendaris: bistik jawa dan selat galantine berkuah manis.',
-      address: 'Jl. Yudhistira No. 9, Serengan, Surakarta', area: 'Serengan',
+      address: 'Jl. Yudhistira No. 9, Serengan, Surakarta', area: 'Serengan', pos: [-7.5823039, 110.818147],
       open: '08:00', close: '18:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
       rating: '4,4', ratingCount: '8.488', phone: '(0271) 653332',
       img: 'assets/img/selat.webp', imgAlt: 'Sepiring selat Solo berisi daging, sayur, dan kuah cokelat',
@@ -24,7 +24,7 @@ window.SOLORASA_DATA = {
     {
       id: 'nasi-liwet-wongso-lemu', name: 'Nasi Liwet Wongso Lemu', category: 'Makanan Berat', label: 'Favorit', dish: 'Nasi liwet',
       desc: 'Nasi liwet gurih dengan suwiran ayam, labu siam, telur, dan areh.',
-      address: 'Jl. Teuku Umar, Keprabon, Banjarsari, Surakarta', area: 'Keprabon',
+      address: 'Jl. Teuku Umar, Keprabon, Banjarsari, Surakarta', area: 'Keprabon', pos: [-7.5695847, 110.8235705],
       open: '16:00', close: '01:00', priceMin: 17000, priceMax: 38000, priceText: 'Rp 17.000–38.000',
       rating: '3,9', ratingCount: '5.251', phone: null,
       img: 'assets/img/nasi-liwet.webp', imgAlt: 'Nasi liwet dengan suwiran ayam dan areh di atas daun pisang',
@@ -35,7 +35,7 @@ window.SOLORASA_DATA = {
     {
       id: 'serabi-notosuman', name: 'Serabi Notosuman', category: 'Jajanan', label: 'Legend', dish: 'Serabi',
       desc: 'Serabi santan legendaris sejak 1923, rasa original dan cokelat.',
-      address: 'Jl. Moh. Yamin No. 28, Jayengan, Serengan, Surakarta', area: 'Serengan',
+      address: 'Jl. Moh. Yamin No. 28, Jayengan, Serengan, Surakarta', area: 'Serengan', pos: [-7.5774586, 110.8200852],
       open: '05:00', close: '17:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
       rating: '4,5', ratingCount: '2.209', phone: null,
       img: 'assets/img/serabi.webp', imgAlt: 'Tumpukan serabi Notosuman dengan pinggiran renyah',
@@ -48,7 +48,7 @@ window.SOLORASA_DATA = {
     {
       id: 'timlo-sastro', name: 'Timlo Sastro', category: 'Makanan Berat', label: 'Legend', dish: 'Timlo',
       desc: 'Timlo kuah bening dengan sosis solo dan hati; kini di Jl. Abdul Muis No. 32A.',
-      address: 'Jl. Abdul Muis No. 32A, Kepatihan Kulon, Jebres, Surakarta', area: 'Jebres',
+      address: 'Jl. Abdul Muis No. 32A, Kepatihan Kulon, Jebres, Surakarta', area: 'Jebres', pos: [-7.5634393, 110.8288903],
       open: '08:00', close: '15:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
       rating: '4,5', ratingCount: '3.298', phone: null,
       img: 'assets/img/timlo.webp', imgAlt: 'Semangkuk timlo Sastro berkuah bening dengan sosis solo, telur, dan jeroan',
@@ -59,7 +59,7 @@ window.SOLORASA_DATA = {
     {
       id: 'sate-pak-manto', name: 'Sate Kambing & Tengkleng Pak Manto', category: 'Makanan Berat', label: 'Favorit', dish: 'Sate & tengkleng',
       desc: 'Warung kambing legendaris sejak 1990, terkenal dengan tengkleng rica-rica dan sate buntel.',
-      address: 'Jl. Honggowongso No. 36, Sriwedari, Laweyan, Surakarta', area: 'Laweyan',
+      address: 'Jl. Honggowongso No. 36, Sriwedari, Laweyan, Surakarta', area: 'Laweyan', pos: [-7.5705565, 110.8168618],
       open: '09:00', close: '19:00', priceMin: 40000, priceMax: 65000, priceText: 'Rp 40.000–65.000',
       rating: '4,4', ratingCount: '18.008', phone: null,
       img: 'assets/img/sate.webp', imgAlt: 'Sate buntel kambing disajikan dengan irisan bawang dan kubis',
@@ -89,7 +89,7 @@ window.SOLORASA_DATA = {
     {
       id: 'wedangan-pak-no', name: 'Wedangan Pak No', category: 'Angkringan', label: 'Murah', dish: 'Wedangan',
       desc: 'Wedangan legendaris: wedang, kopi, dan aneka gorengan, buka sore sampai malam.',
-      address: 'Jl. Jaya Wijaya, Surakarta (Wedangan Pak No 1)', area: 'Jl. Jaya Wijaya',
+      address: 'Jl. Jaya Wijaya, Surakarta (Wedangan Pak No 1)', area: 'Jl. Jaya Wijaya', pos: [-7.538866, 110.8459689],
       open: '16:00', close: '24:00', priceMin: 1000, priceMax: 25000, priceText: 'di bawah Rp 25.000',
       rating: '4,4', ratingCount: '2.907', phone: null,
       img: 'assets/img/wedangan.webp', imgAlt: 'Aneka lauk dan gorengan di gerobak wedangan Solo',
@@ -102,7 +102,7 @@ window.SOLORASA_DATA = {
     {
       id: 'cold-n-brew-veteran', name: "Cold 'n Brew Veteran", category: 'Coffee Shop', label: 'Kopi', dish: 'Coffee shop',
       desc: 'Coffee shop di Jl. Veteran, buka pagi sampai lewat tengah malam.',
-      address: 'Jl. Veteran No. 136, Gajahan, Pasar Kliwon, Surakarta', area: 'Pasar Kliwon',
+      address: 'Jl. Veteran No. 136, Gajahan, Pasar Kliwon, Surakarta', area: 'Pasar Kliwon', pos: [-7.582122, 110.8209122],
       open: '07:00', close: '01:00', priceMin: 25000, priceMax: 50000, priceText: 'Rp 25.000–50.000',
       rating: '4,6', ratingCount: '2.479', checkedAt: '25 Nov 2026', phone: null,
       img: 'assets/img/kopi-susu.webp', imgAlt: 'Segelas es kopi susu di atas meja kayu', illus: true,
@@ -117,7 +117,7 @@ window.SOLORASA_DATA = {
     {
       id: 'ud-djaya-coffee', name: 'UD Djaya Coffee', category: 'Coffee Shop', label: 'Murah', dish: 'Coffee shop',
       desc: 'Coffee shop di Jl. Slamet Riyadi, buka sejak pagi.',
-      address: 'Jl. Slamet Riyadi No. 103, Kauman, Pasar Kliwon, Surakarta', area: 'Pasar Kliwon',
+      address: 'Jl. Slamet Riyadi No. 103, Kauman, Pasar Kliwon, Surakarta', area: 'Pasar Kliwon', pos: [-7.5711875, 110.8244693],
       open: '06:00', close: '22:00', priceMin: 15000, priceMax: 30000, priceText: 'Rp 15.000–30.000',
       rating: '4,6', ratingCount: '871', checkedAt: '25 Nov 2026', phone: null,
       img: 'assets/img/kopi-tubruk.webp', imgAlt: 'Secangkir kopi tubruk dengan gula', illus: true,
@@ -142,5 +142,5 @@ window.SOLORASA_DATA = {
       { id: 'wedangan-pak-no', travel: 15, stay: 60 } ] }
   ],
   categories: ['Legend', 'Makanan Berat', 'Jajanan', 'Angkringan', 'Coffee Shop', 'Street Food', 'Murah'],
-  credits: 'Foto: Wikimedia Commons — Aqilla Rahmi (CC BY 4.0), Gunawan Kartapranata, Meursault2004, Nasudi (CC BY-SA), Fhikri Latifi (CC0), Midori (CC BY 3.0), ESCapade (CC BY-SA 3.0), Sam Hidayat (Pasar Gede, CC BY-SA 4.0). Peta: Google Maps.'
+  credits: 'Foto: Wikimedia Commons — Aqilla Rahmi (CC BY 4.0), Gunawan Kartapranata, Meursault2004, Nasudi (CC BY-SA), Fhikri Latifi (CC0), Midori (CC BY 3.0), ESCapade (CC BY-SA 3.0), Sam Hidayat (Pasar Gede, CC BY-SA 4.0). Peta: Google Maps, OpenStreetMap.'
 };

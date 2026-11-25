@@ -57,6 +57,14 @@
       .sort((a, b) => (b.isOpen - a.isOpen) || (a.priceMin - b.priceMin) || a.name.localeCompare(b.name));
   }
 
+  /* Jarak garis lurus (haversine) dalam km; jarak lewat jalan lebih jauh. */
+  function distKm(a, b) {
+    const r = x => x * Math.PI / 180, h = Math.sin(r(b[0] - a[0]) / 2) ** 2 + Math.cos(r(a[0])) * Math.cos(r(b[0])) * Math.sin(r(b[1] - a[1]) / 2) ** 2;
+    return 12742 * Math.asin(Math.sqrt(h));
+  }
+  function nearest(places, pos) { return places.map(p => ({ ...p, km: distKm(pos, p.pos) })).sort((a, b) => a.km - b.km); }
+  function fmtKm(km) { const m = Math.round(km * 100) * 10; return m < 1000 ? m + ' m' : km.toFixed(1).replace('.', ',') + ' km'; }
+
   function activeChips(f) {
     const rp = n => 'Rp ' + Number(n).toLocaleString('id-ID');
     const c = [];
@@ -98,9 +106,12 @@
     return 'https://www.google.com/maps/dir/?api=1&destination=' + q[q.length - 1] + (q.length > 1 ? '&waypoints=' + q.slice(0, -1).join('%7C') : '');
   }
   // rute bebas: nama tempat katalog diganti alamat lengkapnya; teks lain dipakai apa adanya; tanpa asal = lokasi pengguna
+  function placeQuery(v, places) { const p = places.find(x => x.name.toLowerCase() === v.trim().toLowerCase()); return encodeURIComponent(p ? mapsQuery(p) : v.trim()); }
   function customRouteUrl(from, to, places) {
-    const q = v => { const p = places.find(x => x.name.toLowerCase() === v.trim().toLowerCase()); return p ? mapsQuery(p) : v.trim(); };
-    return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(q(to)) + (from.trim() ? '&origin=' + encodeURIComponent(q(from)) : '');
+    return 'https://www.google.com/maps/dir/?api=1&destination=' + placeQuery(to, places) + (from.trim() ? '&origin=' + placeQuery(from, places) : '');
+  }
+  function routeEmbedUrl(from, to, places) { // tanpa API key; tanpa asal hanya menampilkan tujuan
+    return 'https://maps.google.com/maps?' + (from.trim() ? 'saddr=' + placeQuery(from, places) + '&daddr=' : 'q=') + placeQuery(to, places) + '&output=embed';
   }
   const ROUTE_COLS = ['Urutan', 'Nama', 'Alamat', 'Perjalanan dari sebelumnya (menit)', 'Tiba', 'Selesai', 'Lama di tempat (menit)', 'Jam buka', 'Link Google Maps'];
   function routeCsv(route, plan) {
@@ -110,6 +121,6 @@
   }
   function toTsv(list) { return [COLS, ...rowsFor(list)].map(r => r.map(v => String(v ?? '').replace(/[\t\n]/g, ' ')).join('\t')).join('\n'); }
 
-  const api = { toMin, isOpenAt, nowWib, matchesQuery, matchesCategory, validatePrice, applyFilters, recommend, activeChips, dirUrl, searchUrl, embedUrl, toCsv, toTsv, COLS, fmtMin, planRoute, routeUrl, routeCsv, customRouteUrl };
+  const api = { toMin, isOpenAt, nowWib, matchesQuery, matchesCategory, validatePrice, applyFilters, recommend, distKm, nearest, fmtKm, activeChips, dirUrl, searchUrl, embedUrl, toCsv, toTsv, COLS, fmtMin, planRoute, routeUrl, routeCsv, customRouteUrl, routeEmbedUrl };
   if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.SR = api;
 })(typeof window !== 'undefined' ? window : globalThis);

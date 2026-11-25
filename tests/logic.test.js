@@ -76,10 +76,21 @@ assert.equal(SR.fmtMin(m('23:30') + 60), '00.30');
 assert.equal(SR.planRoute({ start: '06:00', stops: [{ id: 'timlo-sastro', travel: 0, stay: 30 }] }, places)[0].openOk, false);
 assert.equal(SR.routeUrl(pagi).split('%7C').length, 2);
 assert.equal(SR.routeCsv(routes[0], pagi).split('\r\n')[2].split(',')[0], '1');
+// kuliner terdekat: semua tempat punya koordinat di Solo; jarak garis lurus; urut dari yang terdekat
+assert.ok(places.every(p => p.pos[0] < -7.5 && p.pos[0] > -7.6 && p.pos[1] > 110.75 && p.pos[1] < 110.9));
+assert.equal(SR.distKm([-7.57, 110.82], [-7.57, 110.82]), 0);
+assert.ok(Math.abs(SR.distKm([0, 0], [0, 1]) - 111.2) < 0.1);
+assert.equal(SR.nearest(places, [-7.5635, 110.8289])[0].name, 'Timlo Sastro');
+assert.equal(SR.fmtKm(0.85), '850 m'); assert.equal(SR.fmtKm(12.34), '12,3 km'); assert.equal(SR.fmtKm(0.9996), '1,0 km');
 console.log('logic tests passed');
 
 // rute bebas: nama katalog -> alamat lengkap; asal kosong -> tanpa origin (lokasi pengguna)
 const own = SR.customRouteUrl('', 'timlo sastro', places);
 assert.ok(decodeURIComponent(own).includes('Jl. Abdul Muis') && !own.includes('origin='));
 assert.ok(decodeURIComponent(SR.customRouteUrl('Stasiun Solo Balapan', 'Timlo Sastro', places)).includes('origin=Stasiun Solo Balapan'));
+// peta rute di halaman: asal & tujuan; tanpa asal hanya tujuan; teks pengguna tidak boleh menyisipkan parameter
+assert.equal(SR.routeEmbedUrl('Pabelan', 'UNS', places), 'https://maps.google.com/maps?saddr=Pabelan&daddr=UNS&output=embed');
+assert.equal(SR.routeEmbedUrl(' ', 'UNS', places), 'https://maps.google.com/maps?q=UNS&output=embed');
+assert.ok(decodeURIComponent(SR.routeEmbedUrl('a', 'timlo sastro', places)).includes('Jl. Abdul Muis'));
+assert.ok(SR.routeEmbedUrl('a&x=1"', 'UNS', places).includes('saddr=a%26x%3D1%22&'));
 console.log('custom route tests passed');

@@ -100,10 +100,11 @@ main { animation: sr-in var(--sr-dur) ease-out; }
 .sr-hero::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(90deg, var(--sr-accent) 35%, rgba(245, 236, 224, .85) 50%, rgba(245, 236, 224, 0) 80%); }
 .sr-hero > .container-xl { z-index: 2; }
-@media (max-width: 991.98px) {
-  .sr-hero .hero-bg { width: 100%; height: 55%; }
-  .sr-hero::before { background: linear-gradient(0deg, var(--sr-accent) 45%, rgba(245, 236, 224, 0) 100%); }
-  .sr-hero > .container-xl { padding-top: 12rem !important; }
+@media (max-width: 991.98px) { /* HP & tablet: susunan sama dengan desktop, teks di kiri dan foto memudar di kanan */
+  .sr-hero .hero-bg { width: 80%; }
+  .sr-hero::before { background: linear-gradient(90deg, var(--sr-accent) 25%, rgba(245, 236, 224, .85) 60%, rgba(245, 236, 224, 0) 100%); }
+  .sr-hero h1, .sr-hero p { max-width: 75%; }
+  .hero-batik { -webkit-mask-image: linear-gradient(90deg, #000 60%, transparent); mask-image: linear-gradient(90deg, #000 60%, transparent); }
 }
 .map-img { width: 100%; border-radius: 16px; border: 1.5px solid var(--sr-border); }
 iframe.map-img { display: block; height: auto; aspect-ratio: 4 / 3; max-height: 70vh; }
@@ -172,7 +173,8 @@ h1 { line-height: 1.1; }
 }
 
 /* Peta: di desktop peta ikut menempel saat daftar rekomendasi di-scroll */
-@media (min-width: 992px) { #p-map { position: sticky; top: 88px; } }
+@media (min-width: 992px) { #p-map, #near-map { position: sticky; top: 88px; } }
+#near-map { aspect-ratio: 4 / 3; max-height: 70vh; isolation: isolate; font-family: inherit; }
 /* Laptop berlayar pendek: peta di panel info detail menyusut agar panel tempel muat (525px = header + isi panel selain peta) */
 @media (min-width: 992px) { aside iframe.map-img { aspect-ratio: auto; height: clamp(120px, 100vh - 525px, 290px); } }
 #p-list .btn-sm { padding-inline: .9rem; }
@@ -287,7 +289,6 @@ h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
 
 /* Batik dari kiri dengan tepi kanan bergelombang; gelombang bergerak pelan (SMIL di app.js), masuk meluncur ke kanan */
 .hero-batik { position: absolute; left: 0; top: 0; height: 100%; width: min(62%, 820px); z-index: 1; pointer-events: none; opacity: .2; }
-@media (max-width: 991.98px) { .hero-batik { top: auto; bottom: 0; height: 55%; width: 100%; } }
 @media (prefers-reduced-motion: no-preference) { .hero-batik { animation: sr-wave-in 1.4s cubic-bezier(.2, .8, .2, 1) .1s both; } }
 @keyframes sr-wave-in { from { transform: translateX(-100%); opacity: 0; } }
 

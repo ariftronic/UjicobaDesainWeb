@@ -127,7 +127,7 @@
         </svg>
         <div class="container-xl position-relative py-5"><div class="row"><div class="col-lg-6 py-lg-5">
           <h1>Jelajahi Kuliner Solo Tanpa Ribet</h1>
-          <p class="fs-5 text-muted-sr">Cari makanan, harga, porsi, stok, dan informasi penting dalam satu tempat.</p>
+          <p class="fs-5">Cari makanan, harga, porsi, stok, dan informasi penting dalam satu tempat.</p>
           <form class="d-flex flex-column flex-sm-row gap-2 mt-3" role="search" action="jelajah.html">
             <label class="visually-hidden" for="home-q">Cari makanan, tempat, atau area</label>
             <input class="form-control" id="home-q" name="q" type="search" placeholder="Cari makanan, tempat, atau area">
@@ -290,7 +290,7 @@
   }
 
   function peta(main) {
-    const state = { area: 'Semua', openNow: false };
+    const state = { area: '', openNow: false, pos: null };
     const areas = ['Semua', ...new Set(D.places.map(p => p.area))];
     main.innerHTML = `
       <div class="container-xl pt-4">
@@ -300,10 +300,14 @@
           <div class="col-lg-7">
             <div class="panel mb-3"><h2 class="h5 h-ic">${icon('nav', 20)} Rute dari lokasimu</h2><p class="small text-muted-sr mb-0">Tombol “Petunjuk arah” membuka Google Maps dan menghitung rute dari lokasimu sekarang. Tekan “Lihat di peta” untuk menampilkan tempat di peta.</p></div>
             <div class="d-flex flex-wrap gap-2 mb-3 align-items-end">
-              <div><label class="form-label small fw-bold" for="p-area">Area</label><select class="form-select" id="p-area">${areas.map(a => `<option>${esc(a)}</option>`).join('')}</select></div>
+              <div><label class="form-label small fw-bold" for="p-area">Area</label><input class="form-control" id="p-area" type="search" list="area-list" placeholder="Semua, atau ketik sendiri" autocomplete="off">
+                <datalist id="area-list">${areas.map(a => `<option value="${esc(a)}">`).join('')}</datalist></div>
               <div class="form-check form-switch d-flex align-items-center gap-2 ps-0" style="min-height:48px"><input class="form-check-input m-0" type="checkbox" role="switch" id="p-open"><label class="form-check-label" for="p-open">Buka sekarang</label></div>
+              <button class="btn btn-sr-outline" type="button" id="p-near" aria-pressed="false" style="min-height:48px">${icon('pin', 18)} Kuliner terdekat</button>
             </div>
+            <p class="small-note" id="near-status" role="status"></p>
             <iframe class="map-img" id="p-map" title="Peta Google Maps" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-img d-none" id="near-map" role="region" aria-label="Peta kuliner terdekat"></div>
           </div>
           <div class="col-lg-5">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2"><h2 class="h3 mb-0">Rekomendasi</h2>
@@ -319,10 +323,11 @@
               <div class="col-md"><label class="form-label small fw-bold" for="r-from">Mulai dari</label>
                 <input class="form-control" id="r-from" list="place-list" placeholder="Kosongkan = lokasimu sekarang" autocomplete="off"></div>
               <div class="col-md"><label class="form-label small fw-bold" for="r-to">Sampai di</label>
-                <input class="form-control" id="r-to" list="place-list" placeholder="Pilih tempat atau ketik alamat" autocomplete="off" required></div>
+                <input class="form-control" id="r-to" list="place-list" placeholder="Pilih tempat atau ketik alamat" autocomplete="off" required pattern=".*[^ ].*" title="Isi tujuan"></div>
               <div class="col-md-auto"><button class="btn btn-sr w-100" type="submit">${icon('nav', 18)} Lihat rute</button></div>
             </div>
-            <p class="small-note mt-2 mb-0">Pilih nama tempat dari daftar, atau ketik alamat lain seperti stasiun atau hotel. Rute dibuka di Google Maps.</p></form>
+            <p class="small-note mt-2 mb-0">Pilih nama tempat dari daftar, atau ketik alamat lain seperti stasiun atau hotel. Peta rute tampil di bawah.</p>
+            <p class="small mt-3 mb-0" id="r-status" role="status"></p><div id="r-map"></div></form>
           <div class="row g-4">${D.routes.map(r => { const plan = SR.planRoute(r, D.places), end = plan[plan.length - 1].leave; return `
             <div class="col-lg-6"><article class="panel h-100 d-flex flex-column">
               <h3 class="h4 mb-1">${esc(r.name)}</h3>
@@ -334,26 +339,72 @@
               <div class="d-flex flex-wrap gap-2 mt-auto"><a class="btn btn-sr btn-sm" href="${SR.routeUrl(plan)}" target="_blank" rel="noopener">${icon('nav', 16)} Buka rute di Google Maps</a>
                 <button class="btn btn-sr-outline btn-sm" type="button" data-route-csv="${r.id}">${icon('download', 16)} Unduh CSV (Excel)</button></div>
             </article></div>`; }).join('')}</div></section></div>`;
+    const locate = (ok, fail) => navigator.geolocation
+      ? navigator.geolocation.getCurrentPosition(g => ok([g.coords.latitude, g.coords.longitude]), fail, { timeout: 10000, enableHighAccuracy: true }) : fail();
+    const showRoute = (from, to, msg) => {
+      $('#r-status').textContent = msg;
+      $('#r-map').innerHTML = `<iframe class="map-img mt-2" style="aspect-ratio:16/9" src="${SR.routeEmbedUrl(from, to, D.places)}" title="Peta rute ke ${esc(to)}" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a class="btn btn-sr-outline mt-3" href="${SR.customRouteUrl(from, to, D.places)}" target="_blank" rel="noopener">${icon('nav', 18)} Buka di Google Maps</a>`;
+      $('#r-map').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    };
+    let routeRun = 0; // abaikan jawaban lokasi yang terlambat bila rute lain sudah diminta
     $('#own-route').addEventListener('submit', e => { e.preventDefault();
-      window.open(SR.customRouteUrl($('#r-from').value, $('#r-to').value, D.places), '_blank', 'noopener'); });
-    const current = () => SR.recommend(D.places, SR.nowWib()).filter(p => (state.area === 'Semua' || p.area === state.area) && (!state.openNow || p.isOpen));
-    const showMap = p => { const m = $('#p-map'); m.src = SR.embedUrl(p); m.title = 'Peta lokasi ' + p.name; };
+      const from = $('#r-from').value.trim(), to = $('#r-to').value.trim(), run = ++routeRun;
+      if (from) return showRoute(from, to, `Rute dari ${from} ke ${to}`);
+      const noLoc = () => run === routeRun && showRoute('', to, 'Lokasimu tidak bisa dibaca, jadi hanya tujuan yang tampil. Isi “Mulai dari” untuk melihat rutenya.');
+      $('#r-status').textContent = 'Mencari lokasimu… izinkan akses lokasi di browser.';
+      locate(pos => run === routeRun && showRoute(pos.join(','), to, `Rute dari lokasimu ke ${to}`), noLoc);
+    });
+    const current = () => {
+      const list = SR.recommend(D.places, SR.nowWib()).filter(p => SR.matchesQuery(p, state.area) && (!state.openNow || p.isOpen));
+      return state.pos ? SR.nearest(list, state.pos) : list;
+    };
+    // peta Leaflet hanya untuk mode terdekat: embed Google tanpa API key tidak bisa menampilkan banyak pin
+    let lmap, pins, pinOf = {};
+    const showNear = list => {
+      if (!lmap) {
+        lmap = L.map('near-map');
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(lmap);
+        pins = L.layerGroup().addTo(lmap);
+      }
+      pins.clearLayers(); pinOf = {};
+      L.circleMarker(state.pos, { radius: 9, color: '#fff', weight: 3, fillColor: '#1A73E8', fillOpacity: 1 }).bindTooltip('Lokasimu', { permanent: true, direction: 'top', offset: [0, -8] }).addTo(pins);
+      list.forEach(p => { pinOf[p.id] = L.marker(p.pos, { alt: p.name, title: p.name }).addTo(pins)
+        .bindPopup(`<b>${esc(p.name)}</b><br>${esc(p.dish)} · ${SR.fmtKm(p.km)}<br><a href="detail.html?id=${p.id}">Lihat menu dan harga</a>`); });
+      lmap.invalidateSize();
+      lmap.fitBounds([state.pos, ...list.slice(0, 3).map(p => p.pos)], { padding: [45, 45], maxZoom: 16, animate: false });
+      if (list[0]) pinOf[list[0].id].openPopup();
+    };
+    const showMap = p => { const m = $('#p-map'), u = SR.embedUrl(p); if (m.src !== u) m.src = u; m.title = 'Peta lokasi ' + p.name; };
     const render = () => {
       const list = current();
-      $('#p-status').textContent = list.length ? list.length + ' tempat · urut: sedang buka, lalu termurah' : 'Tidak ada tempat yang cocok. Ubah area atau matikan "Buka sekarang".';
+      $('#p-status').textContent = list.length ? list.length + (state.pos ? ' tempat · urut: terdekat dari lokasimu (garis lurus)' : ' tempat · urut: sedang buka, lalu termurah') : 'Tidak ada tempat yang cocok. Ubah area atau matikan "Buka sekarang".';
       $('#p-list').innerHTML = list.map(p => `<li class="panel d-flex gap-3">
         <img src="${p.img}" alt="" width="96" height="96" style="width:96px;height:96px;object-fit:cover;border-radius:12px" loading="lazy">
         <div class="flex-fill" style="min-width:0"><div class="d-flex justify-content-between gap-2"><h3 class="h5 mb-1">${esc(p.name)}</h3><span class="rating small">${icon('star', 14)} ${p.rating}</span></div>
           <div class="small text-muted-sr">${esc(p.address)}</div>
-          <div class="small">${openTag(p.isOpen)} <span class="text-muted-sr">${hours(p)} · ${esc(p.priceText)}</span></div>
+          <div class="small">${openTag(p.isOpen)} <span class="text-muted-sr">${hours(p)} · ${esc(p.priceText)}${p.km == null ? '' : ` · <b>${SR.fmtKm(p.km)}</b>`}</span></div>
           <div class="d-flex flex-wrap gap-2 mt-2"><a class="btn btn-sr btn-sm" href="${SR.dirUrl(p)}" target="_blank" rel="noopener">${icon('nav', 16)} Petunjuk arah</a><button class="btn btn-sr-outline btn-sm" type="button" data-map="${p.id}">${icon('map', 16)} Lihat di peta</button><a class="btn btn-sr-outline btn-sm" href="detail.html?id=${p.id}">${icon('utensils', 16)} Lihat menu dan harga</a></div></div></li>`).join('');
-      if (list[0]) showMap(list[0]);
+      const near = state.pos && window.L; // Leaflet gagal dimuat: tetap pakai peta Google
+      $('#p-map').classList.toggle('d-none', !!near); $('#near-map').classList.toggle('d-none', !near);
+      if (near) showNear(list); else if (list[0]) showMap(list[0]);
     };
     $('#p-list').addEventListener('click', e => { const b = e.target.closest('[data-map]'); if (!b) return;
-      showMap(D.places.find(p => p.id === b.dataset.map));
-      const m = $('#p-map'), r = m.getBoundingClientRect(); // HP: peta ada di atas daftar, gulir ke sana agar perubahan terlihat
+      const pin = pinOf[b.dataset.map], near = state.pos && pin;
+      if (near) { lmap.setView(pin.getLatLng(), 16, { animate: false }); pin.openPopup(); } else showMap(D.places.find(p => p.id === b.dataset.map));
+      const m = $(near ? '#near-map' : '#p-map'), r = m.getBoundingClientRect(); // HP: peta ada di atas daftar, gulir ke sana agar perubahan terlihat
       if (r.bottom < 0 || r.top > innerHeight) m.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); });
-    $('#p-area').addEventListener('change', e => { state.area = e.target.value; render(); });
+    let typing; // tunggu jeda mengetik agar daftar dan peta tidak dimuat ulang tiap huruf
+    $('#p-area').addEventListener('input', e => { clearTimeout(typing); typing = setTimeout(() => {
+      const v = e.target.value.trim(); state.area = v.toLowerCase() === 'semua' ? '' : v; render(); }, 250); });
+    const nearMode = (pos, msg) => { state.pos = pos; $('#p-near').setAttribute('aria-pressed', !!pos); $('#p-near').classList.toggle('btn-sr', !!pos); $('#p-near').classList.toggle('btn-sr-outline', !pos);
+      $('#near-status').textContent = msg; render(); };
+    $('#p-near').addEventListener('click', () => {
+      if (state.pos) return nearMode(null, '');
+      $('#near-status').textContent = 'Mencari lokasimu… izinkan akses lokasi di browser.';
+      locate(pos => nearMode(pos, 'Menampilkan kuliner terdekat dari lokasimu. Tekan “Kuliner terdekat” lagi untuk kembali.'),
+        () => { $('#near-status').textContent = 'Lokasimu tidak bisa dibaca. Izinkan akses lokasi di browser, lalu coba lagi.'; });
+    });
     $('#p-open').addEventListener('change', e => { state.openNow = e.target.checked; render(); });
     const download = (text, name) => {
       const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
