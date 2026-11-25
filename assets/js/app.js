@@ -121,7 +121,7 @@
     main.innerHTML = `
       <section class="sr-hero">
         <img class="hero-bg" src="assets/img/hero-pasar-gede.webp" alt="" width="1280" height="720" fetchpriority="high">
-        <svg class="hero-batik" viewBox="0 0 700 500" preserveAspectRatio="xMinYMid slice" aria-hidden="true" focusable="false">
+        <svg class="hero-batik" aria-hidden="true" focusable="false">
           <defs><pattern id="batik-parang" patternUnits="userSpaceOnUse" width="220" height="220"><image href="assets/img/batik-parang.webp" width="220" height="220"/></pattern></defs>
           <path fill="url(#batik-parang)" d="M0 0 L406 0 C406 31.2 474 31.2 474 62.5 C474 93.8 406 93.8 406 125.0 C406 156.2 474 156.2 474 187.5 C474 218.8 406 218.8 406 250.0 C406 281.2 474 281.2 474 312.5 C474 343.8 406 343.8 406 375.0 C406 406.2 474 406.2 474 437.5 C474 468.8 406 468.8 406 500.0 L0 500 Z"><animate attributeName="d" dur="5s" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" values="M0 0 L406 0 C406 31.2 474 31.2 474 62.5 C474 93.8 406 93.8 406 125.0 C406 156.2 474 156.2 474 187.5 C474 218.8 406 218.8 406 250.0 C406 281.2 474 281.2 474 312.5 C474 343.8 406 343.8 406 375.0 C406 406.2 474 406.2 474 437.5 C474 468.8 406 468.8 406 500.0 L0 500 Z;M0 0 L474 0 C474 31.2 406 31.2 406 62.5 C406 93.8 474 93.8 474 125.0 C474 156.2 406 156.2 406 187.5 C406 218.8 474 218.8 474 250.0 C474 281.2 406 281.2 406 312.5 C406 343.8 474 343.8 474 375.0 C474 406.2 406 406.2 406 437.5 C406 468.8 474 468.8 474 500.0 L0 500 Z;M0 0 L406 0 C406 31.2 474 31.2 474 62.5 C474 93.8 406 93.8 406 125.0 C406 156.2 474 156.2 474 187.5 C474 218.8 406 218.8 406 250.0 C406 281.2 474 281.2 474 312.5 C474 343.8 406 343.8 406 375.0 C406 406.2 474 406.2 474 437.5 C474 468.8 406 468.8 406 500.0 L0 500 Z"/></path>
         </svg>
@@ -139,7 +139,7 @@
         <p class="text-muted-sr mb-3">Pilih makanan khas Solo yang kamu cari.</p>
         <ul class="cats list-unstyled">${D.places.filter((p, i) => D.places.findIndex(x => x.dish === p.dish) === i).map(p => `<li><a href="jelajah.html?q=${encodeURIComponent(p.dish)}"><img src="${p.img}" alt="" loading="lazy" width="128" height="128"><span>${esc(p.dish)}</span></a></li>`).join('')}</ul>
         <ul class="picks list-unstyled" aria-label="Pilihan cepat">${picks.map(([href, t, d, img]) => `<li><a href="jelajah.html?${href}"><img src="${img}" alt="" loading="lazy" width="104" height="104"><b>${t}</b><span class="small text-muted-sr">${d}</span></a></li>`).join('')}</ul></section>
-      <section class="py-5" style="background:var(--sr-accent)" aria-labelledby="h-pil"><div class="container-xl">
+      <section class="py-5" aria-labelledby="h-pil"><div class="container-xl">
         <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
           <div><h2 id="h-pil" class="mb-1">Pilihan Kuliner Solo</h2><p class="text-muted-sr mb-0">Legend, murah, dan favorit wisatawan.</p></div>
           <div class="d-flex align-items-center gap-2"><a class="btn btn-sr-outline" href="jelajah.html">Lihat semua kuliner ${icon('arrow', 18)}</a>
